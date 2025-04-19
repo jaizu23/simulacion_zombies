@@ -16,6 +16,27 @@ public class Mapa extends Thread{
     private final Comedor comedor = new Comedor();
     private final ZonaComun zonaComun = new ZonaComun();
     private final Descanso descanso = new Descanso();
+
+    public Comedor getComedor() {
+        return comedor;
+    }
+
+    public ZonaComun getZonaComun() {
+        return zonaComun;
+    }
+
+    public Descanso getDescanso() {
+        return descanso;
+    }
+
+    public ZonaRiesgo[] getZonasRiesgo() {
+        return zonasRiesgo;
+    }
+
+    public Tunel[] getTuneles() {
+        return tuneles;
+    }
+
     private final ZonaRiesgo[] zonasRiesgo = new ZonaRiesgo[4];
     private final Tunel[] tuneles = new Tunel[4];
 
@@ -28,7 +49,7 @@ public class Mapa extends Thread{
 
     public void run () {
         for (int i = 1; i < 10000; i++) {
-            Humano humano = new Humano("H" + String.format("%04d", i),this);   //El humano recive por parametro un
+            Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
             logger.info("El humano "+ humano.getIdHumano() + "ha nacido.");
             try {

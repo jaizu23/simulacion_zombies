@@ -1,9 +1,13 @@
 package simulacion.seres;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import simulacion.entorno.Mapa;
 import simulacion.exceptions.unexpectedPriorityException;
 
 public class Humano extends Thread implements Comparable<Humano> {
+    private static final Logger log = LogManager.getLogger(Zombie.class);
+
     private int prioridadTunel = -1;
 
     private String id;
@@ -15,6 +19,15 @@ public class Humano extends Thread implements Comparable<Humano> {
         this.marcado = false;
         this.mapa = mapa;
     }
+
+
+    public void esperar(int tiempo) throws InterruptedException {
+        sleep(tiempo);
+    }
+    public void marcar() {
+        marcado = true;
+    }
+
     public void run() {
         System.out.println("Prueba");
     }
