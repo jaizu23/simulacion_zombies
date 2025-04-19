@@ -10,6 +10,7 @@ module simulacion.simulacion_zombies {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires org.apache.logging.log4j;
 
     opens simulacion.simulacion_zombies to javafx.fxml;
     exports simulacion.simulacion_zombies;
