@@ -2,36 +2,40 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="anchor_left">
+      <AnchorPane fx:id="anchor_left" prefWidth="341.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="27.0" prefHeight="56.0" prefWidth="91.0" text="REFUGIO" />
-            <AnchorPane layoutX="15.0" layoutY="83.0" prefHeight="83.0" prefWidth="169.0" style="-fx-border-color: blue; -fx-border-width: 2;">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="34.0" prefHeight="56.0" prefWidth="156.0" text="REFUGIO">
+               <font>
+                  <Font size="22.0" />
+               </font></Label>
+            <AnchorPane layoutX="14.0" layoutY="99.0" prefHeight="150.0" prefWidth="323.0" style="-fx-border-color: blue; -fx-border-width: 2;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="8.0" prefHeight="16.0" prefWidth="91.0" text="Descanso" />
-                  <ScrollPane layoutX="11.0" layoutY="26.0" prefHeight="56.0" prefWidth="150.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="4.0" prefHeight="16.0" prefWidth="91.0" text="Descanso" />
+                  <ScrollPane layoutX="11.0" layoutY="22.0" prefHeight="118.0" prefWidth="302.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="393.0" prefWidth="133.0" />
                     </content>
                   </ScrollPane>
                </children></AnchorPane>
-            <AnchorPane layoutX="16.0" layoutY="183.0" prefHeight="83.0" prefWidth="169.0" style="-fx-border-color: blue; -fx-border-width: 2;">
+            <AnchorPane layoutX="14.0" layoutY="258.0" prefHeight="150.0" prefWidth="323.0" style="-fx-border-color: blue; -fx-border-width: 2;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="3.0" prefHeight="16.0" prefWidth="91.0" text="Comedor" />
-                  <ScrollPane layoutX="9.0" layoutY="23.0" prefHeight="56.0" prefWidth="70.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="5.0" prefHeight="16.0" prefWidth="91.0" text="Comedor" />
+                  <ScrollPane layoutX="9.0" layoutY="24.0" prefHeight="117.0" prefWidth="236.0">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="51.0" />
                      </content>
                   </ScrollPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="23.0" prefHeight="18.0" prefWidth="82.0" text="Comida" />
-                  <Label id="counter_comida" alignment="CENTER" contentDisplay="CENTER" layoutX="108.0" layoutY="39.0" prefHeight="36.0" prefWidth="33.0" text="0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="32.0" prefHeight="18.0" prefWidth="82.0" text="Comida" />
+                  <Label id="counter_comida" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="61.0" prefHeight="36.0" prefWidth="33.0" text="0" />
                </children></AnchorPane>
-            <AnchorPane layoutX="14.0" layoutY="286.0" prefHeight="83.0" prefWidth="169.0" style="-fx-border-color: blue; -fx-border-width: 2;">
+            <AnchorPane layoutX="14.0" layoutY="418.0" prefHeight="150.0" prefWidth="323.0" style="-fx-border-color: blue; -fx-border-width: 2;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="8.0" prefHeight="16.0" prefWidth="91.0" text="Zona común" />
-                  <ScrollPane layoutX="11.0" layoutY="26.0" prefHeight="56.0" prefWidth="150.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="6.0" prefHeight="16.0" prefWidth="91.0" text="Zona común" />
+                  <ScrollPane layoutX="11.0" layoutY="26.0" prefHeight="110.0" prefWidth="302.0">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="134.0" />
                      </content>
@@ -40,19 +44,164 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <VBox fx:id="Vbox_mid" maxWidth="1.7976931348623157E308" minWidth="-Infinity">
+      <VBox fx:id="Vbox_mid" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="342.0">
          <children>
-            <Label alignment="CENTER" prefHeight="68.0" prefWidth="202.0" text="Label" />
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <Label alignment="BOTTOM_CENTER" prefHeight="68.0" prefWidth="343.0" text="TÚNELES">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <AnchorPane prefHeight="125.0" prefWidth="342.0">
                <children>
-                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="56.0" prefWidth="70.0">
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="51.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox layoutX="114.0" layoutY="32.0" prefHeight="36.0" prefWidth="114.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="38.0" text="H001" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H002" />
+                        <Label alignment="CENTER" layoutX="48.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H003" />
+                     </children></HBox>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="91.0" prefHeight="29.0" prefWidth="106.0" text="Label" />
+                  <ScrollPane layoutX="236.0" layoutY="13.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="78.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox layoutX="114.0" layoutY="32.0" prefHeight="36.0" prefWidth="114.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="38.0" text="H001" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H002" />
+                        <Label alignment="CENTER" layoutX="48.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H003" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="91.0" prefHeight="29.0" prefWidth="106.0" text="Label" />
+                  <ScrollPane layoutX="236.0" layoutY="13.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="204.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox layoutX="114.0" layoutY="32.0" prefHeight="36.0" prefWidth="114.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="38.0" text="H001" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H002" />
+                        <Label alignment="CENTER" layoutX="48.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H003" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="91.0" prefHeight="29.0" prefWidth="106.0" text="Label" />
+                  <ScrollPane layoutX="236.0" layoutY="13.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="329.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox layoutX="114.0" layoutY="32.0" prefHeight="36.0" prefWidth="114.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="38.0" text="H001" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H002" />
+                        <Label alignment="CENTER" layoutX="48.0" layoutY="10.0" prefHeight="56.0" prefWidth="38.0" text="H003" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="91.0" prefHeight="29.0" prefWidth="106.0" text="Label" />
+                  <ScrollPane layoutX="236.0" layoutY="13.0" prefHeight="104.0" prefWidth="91.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
                      </content>
                   </ScrollPane>
                </children>
             </AnchorPane>
          </children></VBox>
-      <VBox fx:id="Vbox_right" />
+      <VBox fx:id="Vbox_mid1" layoutX="351.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="342.0">
+         <children>
+            <Label alignment="BOTTOM_CENTER" prefHeight="68.0" prefWidth="343.0" text="ZONA DE RIESGO">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <AnchorPane prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="78.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="204.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="329.0" prefHeight="125.0" prefWidth="342.0">
+               <children>
+                  <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
    </children>
 </HBox>
