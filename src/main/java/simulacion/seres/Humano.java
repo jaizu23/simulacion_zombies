@@ -2,6 +2,7 @@ package simulacion.seres;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import simulacion.entorno.Mapa;
 import simulacion.exceptions.unexpectedPriorityException;
 
@@ -33,7 +34,7 @@ public class Humano extends Thread implements Comparable<Humano> {
     }
 
     @Override
-    public int compareTo(Humano otro) {
+    public int compareTo(@NotNull Humano otro) {
         if (this.prioridadTunel == -1) {
             throw new unexpectedPriorityException();
         } else {
