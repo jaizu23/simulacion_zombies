@@ -1,4 +1,4 @@
 package simulacion.seres;
 
-public class Zombie {
+public class Zombie extends Thread {
 }
