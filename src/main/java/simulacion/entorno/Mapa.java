@@ -11,7 +11,7 @@ import java.util.Random;
 public class Mapa extends Thread{
     private static final Logger logger = LogManager.getLogger(Mapa.class);
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
     private Comedor comedor = new Comedor();
     private ZonaComun zonaComun = new ZonaComun();
@@ -21,7 +21,7 @@ public class Mapa extends Thread{
 
 
     public void run () {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 1; i < 10000; i++) {
             Humano humano = new Humano(this);
             humano.start();
             try {
