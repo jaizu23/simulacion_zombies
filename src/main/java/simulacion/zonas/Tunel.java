@@ -1,9 +1,13 @@
 package simulacion.zonas;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.seres.Humano;
 
+import java.util.HashMap;
 import java.util.concurrent.*;
 
 import static java.lang.Thread.sleep;
@@ -13,9 +17,10 @@ public class Tunel {
     private final int id;
 
     private String idHumanoTunel;
-    private ConcurrentHashMap<String, Humano> humanosSeguros = new ConcurrentHashMap<>(10000);
-    private ConcurrentHashMap<String, Humano> humanosEsperando = new ConcurrentHashMap<>(3);
-    private ConcurrentHashMap<String, Humano> humanosRiesgo = new ConcurrentHashMap<>(10000);
+
+    private final ObservableMap<String, Humano> humanosSeguros = FXCollections.observableMap(new ConcurrentHashMap<>(10000));
+    private final ObservableMap<String, Humano> humanosEsperando = FXCollections.observableMap(new ConcurrentHashMap<>(3));
+    private final ObservableMap<String, Humano> humanosRiesgo = FXCollections.observableMap(new ConcurrentHashMap<>(10000));
 
     private PriorityBlockingQueue<Humano> colaTunel = new PriorityBlockingQueue<>();
 
@@ -30,12 +35,10 @@ public class Tunel {
         try {
             String idHumano = colaTunel.take().getIdHumano();
             try {
-                wait();
                 logger.info("{} está pasando por el tunel {}", idHumano, id);
                 this.idHumanoTunel = idHumano;
                 sleep(1000);
                 logger.info("{} ha salido del tunel {}", idHumano, id);
-                notify();
             } catch (InterruptedException e) {
                 logger.warn("El humano {} ha sido interrumpido mientras pasaba el tunel {}: {}", idHumano, id, e.getMessage());
             }
@@ -47,15 +50,21 @@ public class Tunel {
     public void esperarSeguro (Humano humano) {
         try {
             String idHumano = humano.getIdHumano();
-            humanosSeguros.put(idHumano, humano);
+            synchronized (humanosSeguros) {
+                humanosSeguros.put(idHumano, humano);
+            }
             logger.info("{} está esperando a encontrar grupo para pasar por el túnel {} para entrar a la zona de riesgo", idHumano, id);
 
             semaforo.acquire(); // No deja pasar a 3 hilos a la barrera (de forma que la barrera bajaría) hasta que todos los hilos del grupo anterior han pasado
             barrera.await();
             logger.info("{} ha encontrado grupo para pasar por el túnel {} a la zona de riesgo", idHumano, id);
 
-            humanosSeguros.remove(idHumano);
-            humanosEsperando.put(idHumano, humano);
+            synchronized (humanosSeguros) {
+                humanosSeguros.remove(idHumano);
+            }
+            synchronized (humanosEsperando) {
+                humanosEsperando.put(idHumano, humano);
+            }
 
             humano.setPrioridadTunel(1);
             colaTunel.add(humano);
@@ -63,7 +72,9 @@ public class Tunel {
             pasar();
 
             semaforo.release();
-            humanosEsperando.remove(idHumano);
+            synchronized (humanosEsperando) {
+                humanosEsperando.remove(idHumano);
+            }
         } catch (InterruptedException | BrokenBarrierException e) {
             logger.warn("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {}: {}", humano.getIdHumano(), id, e.getMessage());
         }
@@ -75,10 +86,33 @@ public class Tunel {
 
         String idHumano = humano.getIdHumano();
         logger.info("{} está esperando a a pasar por el túnel {} para volver a la zona segura", idHumano, id);
-        humanosRiesgo.put(idHumano, humano);
+        synchronized (humanosRiesgo) {
+            humanosRiesgo.put(idHumano, humano);
+        }
 
         pasar();
+        synchronized (humanosRiesgo) {
+            humanosRiesgo.remove(idHumano);
+        }
+    }
 
-        humanosRiesgo.remove(idHumano);
+    public int getId() {
+        return id;
+    }
+
+    public String getIdHumanoTunel() {
+        return idHumanoTunel;
+    }
+
+    public ObservableMap<String, Humano> getHumanosSeguros() {
+        return humanosSeguros;
+    }
+
+    public ObservableMap<String, Humano> getHumanosEsperando() {
+        return humanosEsperando;
+    }
+
+    public ObservableMap<String, Humano> getHumanosRiesgo() {
+        return humanosRiesgo;
     }
 }

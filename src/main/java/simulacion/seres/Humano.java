@@ -29,6 +29,9 @@ public class Humano extends Thread implements Comparable<Humano> {
         marcado = true;
     }
 
+    public void run() {
+        mapa.getTuneles()[0].esperarSeguro(this);
+    }
 
     @Override
     public int compareTo(@NotNull Humano otro) {
@@ -53,9 +56,5 @@ public class Humano extends Thread implements Comparable<Humano> {
 
     public Boolean getMarcado() {
         return marcado;
-    }
-
-    public void run() {
-        System.out.println("Prueba");
     }
 }

@@ -15,13 +15,16 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Mapa mapa = new Mapa();
         logger.info("Test log");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        fxmlLoader.setController(new HelloController(mapa));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 576);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
 
+        mapa.start();
     }
 
     public static void main(String[] args) {
