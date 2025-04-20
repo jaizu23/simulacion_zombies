@@ -48,7 +48,7 @@ public class Mapa extends Thread{
     }
 
     public void run () {
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 7; i++) {
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
             logger.info("El humano "+ humano.getIdHumano() + "ha nacido.");

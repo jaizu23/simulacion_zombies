@@ -30,7 +30,7 @@ public class Humano extends Thread implements Comparable<Humano> {
     }
 
     public void run() {
-        System.out.println("Prueba");
+        mapa.getTuneles()[0].esperarSeguro(this);
     }
 
     @Override
