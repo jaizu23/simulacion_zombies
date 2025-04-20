@@ -54,4 +54,11 @@ public class ZonaRiesgo {
             log.error("Se ha producido un error cuando el zombie "+atacante.getIdZombie()+" atacaba al humano "+victima.getIdHumano());
         }
     }
+
+    public void entrarZonaRiesgo(){
+
+    }
+    public void salirZonaRiesgo(){
+
+    }
 }

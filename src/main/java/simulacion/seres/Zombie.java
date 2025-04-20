@@ -30,16 +30,22 @@ public class Zombie extends Thread{
     }
 
     public void run() {
+        Random numero = new Random();
+        int pos = numero.nextInt(4);
         while (true) {
             try {
-                Random numero = new Random();
-                int pos = numero.nextInt(4);
-
+                mapa.getZonasRiesgo()[pos].entrarZonaRiesgo();
                 if (this.mapa.getZonasRiesgo()[pos].hayHumanosDisponibles()) {
                     this.mapa.getZonasRiesgo()[pos].atacar(this);
                 }
                 int espera = 2000 + (new Random().nextInt(1001));
                 sleep(espera);
+                int nuevaPosicion = numero.nextInt(3);
+                if (nuevaPosicion >= pos) {
+                    nuevaPosicion ++;
+                }
+                mapa.getZonasRiesgo()[pos].salirZonaRiesgo();
+                pos = nuevaPosicion;
 
             } catch (Exception e) {
                 log.error("Se ha interrumpido la ejecución del Zombie: "+ idZombie);
