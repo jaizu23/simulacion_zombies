@@ -10,15 +10,14 @@ import simulacion.entorno.Mapa;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
-    private static final Logger logger = LogManager.getLogger(HelloApplication.class);
+public class mainApplication extends Application {
+    private static final Logger logger = LogManager.getLogger(mainApplication.class);
 
     @Override
     public void start(Stage stage) throws IOException {
         Mapa mapa = new Mapa();
-        logger.info("Test log");
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        fxmlLoader.setController(new HelloController(mapa));
+        FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("main-view.fxml"));
+        fxmlLoader.setController(new mainViewController(mapa));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 576);
         stage.setTitle("Hello!");
         stage.setScene(scene);
