@@ -38,7 +38,7 @@ public class Humano extends Thread implements Comparable<Humano> {
         mapa.getTuneles()[0].esperarSeguro(this);
         try {
             while(!Thread.currentThread().isInterrupted()) {
-                log.info("El humano " + id + " sigue vivo.");
+                log.info("El humano " + id + " sigue vivo.");    //temporal.
                 sleep(1000);
             }
         } catch (InterruptedException e) {
