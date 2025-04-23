@@ -12,6 +12,11 @@ public class Humano extends Thread implements Comparable<Humano> {
     private int prioridadTunel = -1;
 
     private String id;
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
     private Mapa mapa;
     private Boolean marcado;
 
@@ -31,6 +36,16 @@ public class Humano extends Thread implements Comparable<Humano> {
 
     public void run() {
         mapa.getTuneles()[0].esperarSeguro(this);
+        try {
+            while(!Thread.currentThread().isInterrupted()) {
+                log.info("El humano " + id + " sigue vivo.");
+                sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            log.info("El humano " + id + " ha muerto asesinado.");
+        }
     }
 
     @Override

@@ -17,6 +17,13 @@ public class Zombie extends Thread{
     private final Mapa mapa;
     private int contadorMuertes;
 
+    public int getContadorMuertes() {
+        return contadorMuertes;
+    }
+
+    public void sumarContadorMuertes() {
+        contadorMuertes = contadorMuertes + 1;
+    }
 
 
     public Zombie(String id, Mapa mapa) {
@@ -32,9 +39,10 @@ public class Zombie extends Thread{
     public void run() {
         Random numero = new Random();
         int pos = numero.nextInt(4);
-        while (true) {
-            try {
+        try {
+            while (true) {
                 mapa.getZonasRiesgo()[pos].entrarZonaRiesgo();
+                log.info("El zombie " + idZombie + " entra en la zona " + pos);
                 if (this.mapa.getZonasRiesgo()[pos].hayHumanosDisponibles()) {
                     this.mapa.getZonasRiesgo()[pos].atacar(this);
                 }
@@ -42,14 +50,15 @@ public class Zombie extends Thread{
                 sleep(espera);
                 int nuevaPosicion = numero.nextInt(3);
                 if (nuevaPosicion >= pos) {
-                    nuevaPosicion ++;
+                    nuevaPosicion++;
                 }
                 mapa.getZonasRiesgo()[pos].salirZonaRiesgo();
+                log.info("El zombie " + idZombie + " sale de la zona " + pos);
                 pos = nuevaPosicion;
-
-            } catch (Exception e) {
-                log.error("Se ha interrumpido la ejecución del Zombie: "+ idZombie);
             }
+        } catch (Exception e) {
+            log.error("Se ha interrumpido la ejecución del Zombie: "+ idZombie);
         }
+
     }
 }
