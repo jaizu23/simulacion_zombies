@@ -50,7 +50,7 @@
                                  <children>
                                     <Label fx:id="descanso" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font></Label>
                                  </children></AnchorPane>
                           </content>
@@ -77,7 +77,7 @@
                                  <children>
                                     <Label fx:id="comedor" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="213.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children></AnchorPane>
@@ -129,7 +129,7 @@
                                  <children>
                                     <Label fx:id="zonaComun" prefHeight="2000.0" prefWidth="286.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children></AnchorPane>
@@ -141,6 +141,11 @@
             </AnchorPane>
          </children>
       </StackPane>
+      <Label fx:id="esperandoTunel2" alignment="CENTER" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="13.0" />
+         </font>
+      </Label>
       <VBox fx:id="Vbox_mid" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="342.0">
          <children>
             <StackPane prefHeight="70.0" prefWidth="200.0">
@@ -183,7 +188,7 @@
                                  <children>
                                     <Label fx:id="segurosTunel1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -192,12 +197,12 @@
                         </ScrollPane>
                         <Label fx:id="esperandoTunel1" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <Label fx:id="tunel1" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <ScrollPane layoutX="235.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
@@ -206,7 +211,7 @@
                                  <children>
                                     <Label fx:id="riesgoTunel1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -242,21 +247,16 @@
                                  <children>
                                     <Label fx:id="segurosTunel2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="esperandoTunel2" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
-                           <font>
-                              <Font name="Fira Code Light" size="13.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="tunel2" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <ScrollPane layoutX="235.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
@@ -265,7 +265,7 @@
                                  <children>
                                     <Label fx:id="riesgoTunel2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -301,7 +301,7 @@
                                  <children>
                                     <Label fx:id="segurosTunel3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -310,12 +310,12 @@
                         </ScrollPane>
                         <Label fx:id="esperandoTunel3" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <Label fx:id="tunel3" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <ScrollPane layoutX="235.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
@@ -324,7 +324,7 @@
                                  <children>
                                     <Label fx:id="riesgoTunel3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -360,7 +360,7 @@
                                  <children>
                                     <Label fx:id="segurosTunel4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -369,12 +369,12 @@
                         </ScrollPane>
                         <Label fx:id="esperandoTunel4" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <Label fx:id="tunel4" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
-                              <Font name="Fira Code Light" size="13.0" />
+                              <Font name="Baskerville Old Face" size="13.0" />
                            </font>
                         </Label>
                         <ScrollPane layoutX="235.0" layoutY="14.0" prefHeight="104.0" prefWidth="91.0">
@@ -383,7 +383,7 @@
                                  <children>
                                     <Label fx:id="riesgoTunel4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -430,7 +430,7 @@
                                  <children>
                                     <Label fx:id="humanos1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -443,7 +443,7 @@
                                  <children>
                                     <Label fx:id="zombies1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -460,7 +460,7 @@
                                  <children>
                                     <Label fx:id="humanos2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -473,7 +473,7 @@
                                  <children>
                                     <Label fx:id="zombies2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -490,7 +490,7 @@
                                  <children>
                                     <Label fx:id="humanos3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -503,7 +503,7 @@
                                  <children>
                                     <Label fx:id="zombies3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -520,7 +520,7 @@
                                  <children>
                                     <Label fx:id="humanos4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -533,7 +533,7 @@
                                  <children>
                                     <Label fx:id="zombies4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
                                        <font>
-                                          <Font name="Fira Code Light" size="12.0" />
+                                          <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>

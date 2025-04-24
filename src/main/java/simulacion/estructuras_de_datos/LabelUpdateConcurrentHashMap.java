@@ -2,6 +2,7 @@ package simulacion.estructuras_de_datos;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 import simulacion.exceptions.uninitializedLabelUpdateConcurrentHashMap;
 
@@ -31,7 +32,7 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
-            Platform.runLater(() -> label.setText(String.join(", ", keySet()))); // Ya es Thread-safe
+            updateLabel();
             return super.put(key, value); // Ya es Thread-safe
         }
     }
@@ -40,9 +41,15 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
-            Platform.runLater(() -> label.setText(String.join(", ", keySet()))); // Ya es Thread-safe
+            updateLabel();
             return super.remove(key); // Ya es Thread-safe
         }
+    }
+
+    private void updateLabel() {
+        Platform.runLater(() -> {
+            label.setText(String.join(", ", keySet())); // Ya es Thread-safe
+        });
     }
 
     public Label getLabel() {
