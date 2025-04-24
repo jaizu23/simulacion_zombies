@@ -3,6 +3,7 @@ package simulacion.zonas.seguras;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import simulacion.exceptions.killedHumanException;
 import simulacion.seres.Humano;
 
 import java.util.Random;
@@ -10,14 +11,18 @@ import java.util.Random;
 public abstract class Refugio {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
-    protected void pasarTiempo (String id, int inf, int sup) {
+    protected void pasarTiempo (Humano humano, int inf, int sup) {
+        String id = humano.getIdHumano();
         try {
-            logger.info("El humano {} está pasando tiempo en la zona {}", id, this.getClass().getSimpleName());
+            logger.info("{} está pasando tiempo en la zona {}", id, this.getClass().getSimpleName());
             Thread.sleep(r.nextInt(inf, sup));
         } catch (InterruptedException e) {
-            logger.error("Error mientras el humano {} pasaba tiempo en la zona {}: {}", id, this.getClass().getSimpleName(), e);
+            if (humano.isAsesinado()) {
+                throw new killedHumanException();
+            }
+            logger.error("Error mientras el {} pasaba tiempo en la zona {}: {}", id, this.getClass().getSimpleName(), e);
         }
     }
 

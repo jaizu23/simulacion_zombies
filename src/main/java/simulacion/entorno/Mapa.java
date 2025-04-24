@@ -30,18 +30,18 @@ public class Mapa extends Thread{
     }
 
     public void run () {
-        for (int i = 1; i < 200; i++) {
+        Zombie zombie = new Zombie("Z0000", this);
+        zombie.start();
+        for (int i = 1; i < 10000; i++) {
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
-            logger.info("El humano "+ humano.getIdHumano() + "ha nacido.");
+            logger.info(humano.getIdHumano() + " ha nacido.");
             try {
-                sleep(r.nextInt(0, 500));
+                sleep(r.nextInt(500, 2000));
             } catch (InterruptedException e) {
                 logger.error("Se ha interrumpido un hilo mientras esperaba al crear los humanos{}", String.valueOf(e));
             }
         }
-        Zombie zombie = new Zombie("Z0000", this);
-        zombie.start();
     }
 
     public Comedor getComedor() {

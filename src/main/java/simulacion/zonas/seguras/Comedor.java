@@ -9,7 +9,6 @@ import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
 import simulacion.seres.Humano;
 
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Comedor extends Refugio{
     private static final Logger logger = LogManager.getLogger(Comedor.class);
@@ -38,7 +37,7 @@ public class Comedor extends Refugio{
         synchronized (contadorComida) {
             Platform.runLater(() -> contadorComida.set(contadorComida.get() - 1));
         }
-        pasarTiempo(id, 3000, 5000);
+        pasarTiempo(humano, 3000, 5000);
         salirZona(humanosComedor, id);
     }
 

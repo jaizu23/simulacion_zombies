@@ -9,12 +9,15 @@ import java.util.Random;
 public class Zombie extends Thread implements Ser{
     private static final Logger log = LogManager.getLogger(Zombie.class);
 
+    Random r = new Random();
+
     public String getIdZombie() {
         return idZombie;
     }
 
-    private String idZombie;
+    private final String idZombie;
     private final Mapa mapa;
+    private int zona = -1;
     private int contadorMuertes;
 
     public int getContadorMuertes() {
@@ -22,7 +25,7 @@ public class Zombie extends Thread implements Ser{
     }
 
     public void sumarContadorMuertes() {
-        contadorMuertes = contadorMuertes + 1;
+        contadorMuertes += 1;
     }
 
 
@@ -32,32 +35,37 @@ public class Zombie extends Thread implements Ser{
         this.contadorMuertes = 0;
     }
 
-    public void esperar(int tiempo) throws InterruptedException {
-        sleep(tiempo);
+    public Zombie(String id, Mapa mapa, int zona) {
+        this.idZombie = id;
+        this.mapa = mapa;
+        this.zona = zona;
+        this.contadorMuertes = 0;
     }
 
     public void run() {
-        Random numero = new Random();
-        int pos = numero.nextInt(4);
+        int pos;
+        if (zona == -1) {
+            pos = r.nextInt(4);
+        } else {
+            pos = zona;
+        }
         try {
-            while (true) {
-                mapa.getZonasRiesgo()[pos].entrarZonaRiesgo(this, false);
-                log.info("El zombie " + idZombie + " entra en la zona " + pos);
+            while (!mapa.isPausado()) {
+                mapa.getZonasRiesgo()[pos].entrarZonaRiesgo(this);
                 if (this.mapa.getZonasRiesgo()[pos].hayHumanosDisponibles()) {
                     this.mapa.getZonasRiesgo()[pos].atacar(this);
                 }
-                int espera = 2000 + (new Random().nextInt(1001));
-                sleep(espera);
-                int nuevaPosicion = numero.nextInt(3);
+                int espera = r.nextInt(2000, 3001);
+                Thread.sleep(espera);
+                int nuevaPosicion = r.nextInt(3);
                 if (nuevaPosicion >= pos) {
                     nuevaPosicion++;
                 }
                 mapa.getZonasRiesgo()[pos].salirZonaRiesgo(idZombie, false);
-                log.info("El zombie " + idZombie + " sale de la zona " + pos);
                 pos = nuevaPosicion;
             }
         } catch (Exception e) {
-            log.error("Se ha interrumpido la ejecución del Zombie: "+ idZombie);
+            log.error("Se ha interrumpido la ejecución del Zombie: {}", idZombie);
         }
 
     }
