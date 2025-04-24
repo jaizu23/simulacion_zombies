@@ -6,7 +6,7 @@ import simulacion.entorno.Mapa;
 
 import java.util.Random;
 
-public class Zombie extends Thread{
+public class Zombie extends Thread implements Ser{
     private static final Logger log = LogManager.getLogger(Zombie.class);
 
     public String getIdZombie() {
@@ -41,7 +41,7 @@ public class Zombie extends Thread{
         int pos = numero.nextInt(4);
         try {
             while (true) {
-                mapa.getZonasRiesgo()[pos].entrarZonaRiesgo();
+                mapa.getZonasRiesgo()[pos].entrarZonaRiesgo(this, false);
                 log.info("El zombie " + idZombie + " entra en la zona " + pos);
                 if (this.mapa.getZonasRiesgo()[pos].hayHumanosDisponibles()) {
                     this.mapa.getZonasRiesgo()[pos].atacar(this);
@@ -52,7 +52,7 @@ public class Zombie extends Thread{
                 if (nuevaPosicion >= pos) {
                     nuevaPosicion++;
                 }
-                mapa.getZonasRiesgo()[pos].salirZonaRiesgo();
+                mapa.getZonasRiesgo()[pos].salirZonaRiesgo(idZombie, false);
                 log.info("El zombie " + idZombie + " sale de la zona " + pos);
                 pos = nuevaPosicion;
             }

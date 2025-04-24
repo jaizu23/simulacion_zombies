@@ -35,12 +35,17 @@ public class Tunel {
         try {
             String idHumano = colaTunel.take().getIdHumano();
             try {
-                humanosEsperando.remove(idHumano);
+                boolean ladoSeguro = humanosEsperando.remove(idHumano) != null; // Si el humano a borrar está en el lado seguro liberaremos un permiso del semáforo
+                humanosRiesgo.remove(idHumano);
                 logger.info("{} está pasando por el tunel {}", idHumano, id);
                 Platform.runLater(() -> idHumanoTunel.set(idHumano));
                 sleep(1000);
                 Platform.runLater(() -> idHumanoTunel.set(""));
                 logger.info("{} ha salido del tunel {}", idHumano, id);
+
+                if (ladoSeguro) {
+                    semaforo.release();
+                }
             } catch (InterruptedException e) {
                 logger.warn("El humano {} ha sido interrumpido mientras pasaba el tunel {}: {}", idHumano, id, e.getMessage());
             }
@@ -67,8 +72,6 @@ public class Tunel {
             colaTunel.add(humano);
 
             pasar();
-
-            semaforo.release();
         } catch (InterruptedException | BrokenBarrierException e) {
             logger.warn("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {}: {}", humano.getIdHumano(), id, e.getMessage());
         }

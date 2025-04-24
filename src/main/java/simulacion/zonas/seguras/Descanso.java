@@ -9,4 +9,11 @@ public class Descanso extends Refugio{
     public LabelUpdateConcurrentHashMap<Humano> getHumanosDescanso() {
         return humanosDescanso;
     }
+
+    public void descansar (Humano humano, int inf, int sup) {
+        String id = humano.getIdHumano();
+        entrarZona(humanosDescanso, humano);
+        pasarTiempo(id, inf, sup);
+        salirZona(humanosDescanso, id);
+    }
 }

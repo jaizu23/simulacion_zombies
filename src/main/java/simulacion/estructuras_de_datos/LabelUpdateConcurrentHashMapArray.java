@@ -5,21 +5,22 @@ import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
 import simulacion.exceptions.uninitializedLabelUpdateConcurrentHashMap;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LabelUpdateConcurrentHashMapArray<V> extends ArrayList<LabelUpdateConcurrentHashMap<V>>{
+public class LabelUpdateConcurrentHashMapArray<V> extends ArrayList<ConcurrentHashMap<String, V>>{
 
     private Label label = null;
 
     public LabelUpdateConcurrentHashMapArray() {}
 
-    public LabelUpdateConcurrentHashMapArray(List<LabelUpdateConcurrentHashMap<V>> listaMapas){
+    public LabelUpdateConcurrentHashMapArray(ArrayList<ConcurrentHashMap<String, V>> listaMapas){
         super(listaMapas);
     }
 
-    public LabelUpdateConcurrentHashMapArray(ArrayList<LabelUpdateConcurrentHashMap<V>> listaMapas, Label label) {
+    public LabelUpdateConcurrentHashMapArray(ArrayList<ConcurrentHashMap<String, V>> listaMapas, Label label) {
         super(listaMapas);
         this.label = label;
     }

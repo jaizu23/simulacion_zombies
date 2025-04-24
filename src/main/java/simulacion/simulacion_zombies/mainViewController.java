@@ -110,7 +110,7 @@ public class mainViewController implements Initializable {
         humanosDescanso.setLabel(descanso);
         humanosComedor.setLabel(comedor);
         humanosComun.setLabel(zonaComun);
-        comida.textProperty().bind(Bindings.convert(contadorComida));
+        comida.textProperty().bind(contadorComida.asString());
 
         // Labels túnel
         ArrayList<Label> labelsS = new ArrayList<>(List.of(segurosTunel1, segurosTunel2, segurosTunel3, segurosTunel4));
