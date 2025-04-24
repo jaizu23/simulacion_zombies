@@ -3,6 +3,8 @@ package simulacion.zonas;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.entorno.Mapa;
+import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMapArray;
 import simulacion.seres.Humano;
 import simulacion.seres.Zombie;
 import simulacion.zonas.seguras.ZonaComun;
@@ -14,25 +16,28 @@ public class ZonaRiesgo {
     private static final Logger log = LogManager.getLogger(ZonaRiesgo.class);
 
     private int id;
-    private ConcurrentHashMap<String, Humano> humanosLibres = new ConcurrentHashMap<>(10000);
-    private ConcurrentHashMap<String, Humano> humanosCombatiendo = new ConcurrentHashMap<>(10000);
-    private ConcurrentHashMap<String, Zombie> zombies = new ConcurrentHashMap<>(10000);
+
+    private LabelUpdateConcurrentHashMap<Humano> humanosLibres = new LabelUpdateConcurrentHashMap<>(10000);
+    private LabelUpdateConcurrentHashMap<Humano> humanosCombatiendo = new LabelUpdateConcurrentHashMap<>(10000);
+    private LabelUpdateConcurrentHashMapArray<Humano> humanos = new LabelUpdateConcurrentHashMapArray<>(new ArrayList<>(List.of(humanosLibres, humanosCombatiendo)));
+    private LabelUpdateConcurrentHashMap<Zombie> zombies = new LabelUpdateConcurrentHashMap<>(10000);
 
     public ZonaRiesgo(int id){
         this.id = id;
     }
 
     public Boolean hayHumanosDisponibles() {
-        return !humanosLibres.isEmpty();
+        return !humanos.getFirst().isEmpty();
     }
 
     private synchronized Humano elegirVictima() {
+        LabelUpdateConcurrentHashMap<Humano> humanosLibres = humanos.getFirst();
         ArrayList<Humano> listaHumanos = new ArrayList<>(humanosLibres.values());
         Random rand = new Random();
         int posVictima = rand.nextInt(listaHumanos.size());
         Humano victima = listaHumanos.get(posVictima);
         humanosLibres.remove(victima.getIdHumano());
-        humanosCombatiendo.put(victima.getIdHumano(), victima);
+        humanos.getLast().put(victima.getIdHumano(), victima);
         return victima;
     }
 
@@ -79,5 +84,13 @@ public class ZonaRiesgo {
     }
     public void salirZonaRiesgo(){
 
+    }
+
+    public LabelUpdateConcurrentHashMapArray<Humano> getHumanos() {
+        return humanos;
+    }
+
+    public LabelUpdateConcurrentHashMap<Zombie> getZombies() {
+        return zombies;
     }
 }

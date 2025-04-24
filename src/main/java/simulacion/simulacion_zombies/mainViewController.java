@@ -1,6 +1,8 @@
 package simulacion.simulacion_zombies;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
@@ -12,7 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.entorno.Mapa;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMapArray;
 import simulacion.seres.Humano;
+import simulacion.seres.Zombie;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,11 +27,17 @@ import java.util.Set;
 public class mainViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger(mainViewController.class);
 
-    private Mapa mapa;
-
+    // Labels zona segura
     @FXML
-    private Label welcomeText;
+    private Label descanso;
+    @FXML
+    private Label comedor;
+    @FXML
+    private Label comida;
+    @FXML
+    private Label zonaComun;
 
+    // Labels tunel
     @FXML
     private Label segurosTunel1;
     @FXML
@@ -64,25 +74,50 @@ public class mainViewController implements Initializable {
     @FXML
     private Label riesgoTunel4;
 
+    // Labels zona de riesgo
+    @FXML
+    private Label humanos1;
+    @FXML
+    private Label humanos2;
+    @FXML
+    private Label humanos3;
+    @FXML
+    private Label humanos4;
+
+    @FXML
+    private Label zombies1;
+    @FXML
+    private Label zombies2;
+    @FXML
+    private Label zombies3;
+    @FXML
+    private Label zombies4;
+
+    private Mapa mapa;
+
     public mainViewController(Mapa mapa) {
         this.mapa = mapa;
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    @FXML
-    private AnchorPane anchor_left;
-
     private void initializeLabelsData () {
+        // Labels zona segura
+        LabelUpdateConcurrentHashMap<Humano> humanosDescanso = mapa.getDescanso().getHumanosDescanso();
+        LabelUpdateConcurrentHashMap<Humano> humanosComedor = mapa.getComedor().getHumanosComedor();
+        LabelUpdateConcurrentHashMap<Humano> humanosComun = mapa.getZonaComun().getHumanosComun();
+        IntegerProperty contadorComida = mapa.getComedor().getContadorComida();
+
+        humanosDescanso.setLabel(descanso);
+        humanosComedor.setLabel(comedor);
+        humanosComun.setLabel(zonaComun);
+        comida.textProperty().bind(Bindings.convert(contadorComida));
+
+        // Labels túnel
         ArrayList<Label> labelsS = new ArrayList<>(List.of(segurosTunel1, segurosTunel2, segurosTunel3, segurosTunel4));
         ArrayList<Label> labelsE = new ArrayList<>(List.of(esperandoTunel1, esperandoTunel2, esperandoTunel3, esperandoTunel4));
         ArrayList<Label> labelsR = new ArrayList<>(List.of(riesgoTunel1, riesgoTunel2, riesgoTunel3, riesgoTunel4));
         ArrayList<Label> labelsT = new ArrayList<>(List.of(tunel1, tunel2, tunel3, tunel4));
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
             LabelUpdateConcurrentHashMap<Humano> humanosST = mapa.getTuneles()[i].getHumanosSeguros();
             humanosST.setLabel(labelsS.get(i));
 
@@ -94,6 +129,18 @@ public class mainViewController implements Initializable {
 
             StringProperty humanoT = mapa.getTuneles()[i].getIdHumanoTunel();
             labelsT.get(i).textProperty().bind(humanoT);
+        }
+
+        // Labels zona de riesgo
+        ArrayList<Label> humanosLabels = new ArrayList<>(List.of(humanos1, humanos2, humanos3, humanos4));
+        ArrayList<Label> zombiesLabels = new ArrayList<>(List.of(zombies1, zombies2, zombies3, zombies4));
+
+        for (int i = 0; i < 4; i++) {
+            LabelUpdateConcurrentHashMapArray<Humano> humanosR = mapa.getZonasRiesgo()[i].getHumanos();
+            humanosR.setLabel(humanosLabels.get(i));
+
+            LabelUpdateConcurrentHashMap<Zombie> zombiesR = mapa.getZonasRiesgo()[i].getZombies();
+            zombiesR.setLabel(zombiesLabels.get(i));
         }
     }
 
