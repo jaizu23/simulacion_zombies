@@ -46,7 +46,13 @@
                         </Label>
                         <ScrollPane layoutX="11.0" layoutY="22.0" prefHeight="118.0" prefWidth="302.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="393.0" prefWidth="133.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="286.0">
+                                 <children>
+                                    <Label fx:id="descanso" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font></Label>
+                                 </children></AnchorPane>
                           </content>
                         </ScrollPane>
                      </children>
@@ -67,7 +73,14 @@
                         </Label>
                         <ScrollPane layoutX="9.0" layoutY="24.0" prefHeight="118.0" prefWidth="229.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="51.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="213.0">
+                                 <children>
+                                    <Label fx:id="comedor" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="213.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </content>
                         </ScrollPane>
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="32.0" prefHeight="18.0" prefWidth="82.0" text="Comida" textFill="WHITE">
@@ -82,7 +95,7 @@
                               </DropShadow>
                            </effect>
                         </Label>
-                        <Label id="counter_comida" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="61.0" prefHeight="36.0" prefWidth="33.0" text="0" textFill="#fcfcfc">
+                        <Label id="counter_comida" fx:id="comida" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="61.0" prefHeight="36.0" prefWidth="33.0" text="0" textFill="#fcfcfc">
                            <font>
                               <Font name="Sylfaen" size="41.0" />
                            </font>
@@ -98,7 +111,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="14.0" layoutY="418.0" prefHeight="150.0" prefWidth="326.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="-1.0" prefHeight="30.0" prefWidth="122.0" text="Zona común" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="-8.0" prefHeight="30.0" prefWidth="122.0" text="Zona común" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="23.0" />
                            </font>
@@ -110,9 +123,16 @@
                               </DropShadow>
                            </effect>
                         </Label>
-                        <ScrollPane layoutX="11.0" layoutY="26.0" prefHeight="110.0" prefWidth="302.0">
+                        <ScrollPane layoutX="11.0" layoutY="22.0" prefHeight="118.0" prefWidth="302.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="134.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="286.0">
+                                 <children>
+                                    <Label fx:id="zonaComun" prefHeight="2000.0" prefWidth="286.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </content>
                         </ScrollPane>
                      </children>
@@ -161,7 +181,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="segurosTunel1" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="segurosTunel1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -184,7 +204,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="riesgoTunel1" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="riesgoTunel1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -220,7 +240,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="segurosTunel11" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="segurosTunel2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -229,12 +249,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="esperandoTunel11" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="esperandoTunel2" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="tunel11" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="tunel2" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
@@ -243,7 +263,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="riesgoTunel11" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="riesgoTunel2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -279,7 +299,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="segurosTunel111" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="segurosTunel3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -288,12 +308,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="esperandoTunel111" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="esperandoTunel3" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="tunel111" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="tunel3" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
@@ -302,7 +322,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="riesgoTunel111" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="riesgoTunel3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -338,7 +358,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="segurosTunel1111" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="segurosTunel4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -347,12 +367,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="esperandoTunel1111" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="esperandoTunel4" alignment="CENTER" layoutX="118.0" layoutY="35.0" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="tunel1111" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
+                        <Label fx:id="tunel4" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Light" size="13.0" />
                            </font>
@@ -361,7 +381,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5000.0" prefWidth="76.0">
                                  <children>
-                                    <Label fx:id="riesgoTunel1111" alignment="TOP_LEFT" prefHeight="5000.0" prefWidth="76.0" wrapText="true">
+                                    <Label fx:id="riesgoTunel4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="76.0" wrapText="true">
                                        <font>
                                           <Font name="Fira Code Light" size="12.0" />
                                        </font>
@@ -402,58 +422,122 @@
                         </DropShadow>
                      </effect>
                   </Label>
-                  <AnchorPane prefHeight="125.0" prefWidth="342.0">
+                  <AnchorPane layoutX="10.0" layoutY="78.0" prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                        <ScrollPane layoutX="15.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="humanos1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                        <ScrollPane layoutX="178.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="zombies1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="78.0" prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                        <ScrollPane layoutX="15.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="humanos2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                        <ScrollPane layoutX="178.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="zombies2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="204.0" prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                        <ScrollPane layoutX="15.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="humanos3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                        <ScrollPane layoutX="178.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="zombies3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="329.0" prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="156.0">
+                        <ScrollPane layoutX="15.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="214.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="humanos4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <ScrollPane layoutX="186.0" layoutY="13.0" prefHeight="94.0" prefWidth="141.0">
+                        <ScrollPane layoutX="178.0" layoutY="14.0" prefHeight="94.0" prefWidth="147.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="226.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
+                                 <children>
+                                    <Label fx:id="zombies4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                       <font>
+                                          <Font name="Fira Code Light" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </ScrollPane>
                      </children>
