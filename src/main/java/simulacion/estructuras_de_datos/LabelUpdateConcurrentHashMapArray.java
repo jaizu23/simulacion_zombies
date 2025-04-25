@@ -30,8 +30,9 @@ public class LabelUpdateConcurrentHashMapArray<V> extends CopyOnWriteArrayList<C
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
+            V result = get(n).put(key, value);
             updateLabel();
-            return get(n).put(key, value); // Ya es Thread-safe
+            return result; // Ya es Thread-safe
         }
     }
 
@@ -39,15 +40,19 @@ public class LabelUpdateConcurrentHashMapArray<V> extends CopyOnWriteArrayList<C
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
+            V result = get(n).remove(key);
             updateLabel();
-            return get(n).remove(key); // Ya es Thread-safe
+            return result; // Ya es Thread-safe
         }
     }
 
     private void updateLabel() {
         ArrayList<String> clavesMapas = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
-            clavesMapas.add(String.join(", ", get(i).keySet()));
+            ConcurrentHashMap.KeySetView<String, V> keySet = get(i).keySet();
+            if (!keySet.isEmpty()) {
+                clavesMapas.add(String.join(", ", keySet));
+            }
         }
         Platform.runLater(() -> label.setText(String.join(", ", clavesMapas))); // Ya es Thread-safe
     }

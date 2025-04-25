@@ -37,7 +37,7 @@ public class Mapa extends Thread{
             humano.start();
             logger.info(humano.getIdHumano() + " ha nacido.");
             try {
-                sleep(r.nextInt(500, 2000));
+                sleep(r.nextInt(0, 500));
             } catch (InterruptedException e) {
                 logger.error("Se ha interrumpido un hilo mientras esperaba al crear los humanos{}", String.valueOf(e));
             }

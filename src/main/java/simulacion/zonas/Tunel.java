@@ -51,7 +51,7 @@ public class Tunel {
             if (humano.isAsesinado()) {
                 throw new killedHumanException();
             } else {
-                logger.warn("El humano {} ha sido interrumpido mientras pasaba el tunel {}: {}", idHumano, id, e.getMessage());
+                logger.error("El humano {} ha sido interrumpido mientras pasaba el tunel {}: {}", idHumano, id, e.getMessage());
             }
         }
     }
@@ -76,9 +76,9 @@ public class Tunel {
             pasar();
         } catch (InterruptedException | BrokenBarrierException e) {
             if (humano.isAsesinado()) {
-                throw new killedHumanException();
+                logger.error("{} asesinado en zona segura", humano.getIdHumano());
             }
-            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {}: {}", humano.getIdHumano(), id, e.getMessage());
+            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {} esperando en zona segura: {}", humano.getIdHumano(), id, e.getMessage());
         }
     }
 
@@ -93,9 +93,10 @@ public class Tunel {
             pasar();
         } catch (InterruptedException e) {
             if (humano.isAsesinado()) {
+                humanosRiesgo.remove(idHumano);
                 throw new killedHumanException();
             }
-            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {}: {}", humano.getIdHumano(), id, e.getMessage());
+            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {} esperando en zona de riesgo: {}", humano.getIdHumano(), id, e.getMessage());
         }
     }
 

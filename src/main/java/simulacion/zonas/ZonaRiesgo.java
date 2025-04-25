@@ -12,6 +12,7 @@ import simulacion.seres.Zombie;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ZonaRiesgo {
     private static final Logger logger = LogManager.getLogger(ZonaRiesgo.class);
@@ -22,7 +23,7 @@ public class ZonaRiesgo {
 
     private final ConcurrentHashMap<String, Humano> humanosLibres = new ConcurrentHashMap<>(10000);
     private final ConcurrentHashMap<String, Humano> humanosCombatiendo = new ConcurrentHashMap<>(10000);
-    private final LabelUpdateConcurrentHashMapArray<Humano> humanos = new LabelUpdateConcurrentHashMapArray<>(new ArrayList<>(List.of(humanosLibres, humanosCombatiendo)));
+    private final LabelUpdateConcurrentHashMapArray<Humano> humanos = new LabelUpdateConcurrentHashMapArray<>(new CopyOnWriteArrayList<>(List.of(humanosLibres, humanosCombatiendo)));
     private final LabelUpdateConcurrentHashMap<Zombie> zombies = new LabelUpdateConcurrentHashMap<>(10000);
 
     public ZonaRiesgo(int id){
@@ -41,7 +42,7 @@ public class ZonaRiesgo {
         return victima;
     }
 
-    private void zombificar(Humano victima, Zombie atacante, int tiempo)  {
+    private void zombificar(Humano victima, Zombie atacante, int tiempo) {
         if (victima.getMarcado()) {
             String nuevoId = "Z" + victima.getIdHumano().substring(1);
             victima.setAsesinado(true);
@@ -49,7 +50,7 @@ public class ZonaRiesgo {
             try {
                 victima.join(); //esperamos a que el humano muera del todo.
             } catch (InterruptedException e) {
-                throw new killedHumanException();
+                logger.error("Problema de {}", nuevoId);
             }
             try {
                 Thread.sleep(tiempo);
@@ -82,7 +83,7 @@ public class ZonaRiesgo {
             }
         } catch (Exception e) {
             if (victima.isAsesinado()) {
-                throw new killedHumanException();
+                logger.error("Excepcion de {} {}", atacante.getIdZombie(), victima.getIdHumano());
             } else {
                 logger.error("Se ha producido un error cuando {} atacaba al humano {}", atacante.getIdZombie(), victima.getIdHumano());
             }
@@ -96,6 +97,7 @@ public class ZonaRiesgo {
             Thread.sleep(r.nextInt(3000, 5000));
         } catch (InterruptedException e) {
             if (humano.isAsesinado()) {
+                salirZonaRiesgo(id, true);
                 throw new killedHumanException();
             } else {
                 logger.error("Se ha producido un error cuando {} recogia comida", id);
@@ -122,6 +124,7 @@ public class ZonaRiesgo {
     public void salirZonaRiesgo (String id, boolean humano) {
         if (humano) {
             humanos.remove(0, id);
+            humanos.remove(1, id);
         } else  {
             zombies.remove(id);
         }

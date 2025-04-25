@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -48,7 +48,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="286.0">
                                  <children>
-                                    <Label fx:id="descanso" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0">
+                                    <Label fx:id="descanso" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font></Label>
@@ -75,7 +75,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="213.0">
                                  <children>
-                                    <Label fx:id="comedor" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="213.0">
+                                    <Label fx:id="comedor" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="213.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -127,7 +127,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="286.0">
                                  <children>
-                                    <Label fx:id="zonaComun" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0">
+                                    <Label fx:id="zonaComun" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="286.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -433,7 +433,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="humanos1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="humanos1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -446,7 +446,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="zombies1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="zombies1" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -463,7 +463,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="humanos2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="humanos2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -476,7 +476,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="zombies2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="zombies2" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -493,7 +493,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="humanos3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="humanos3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -506,7 +506,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="zombies3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="zombies3" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -523,7 +523,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="humanos4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="humanos4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
@@ -536,7 +536,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2000.0" prefWidth="131.0">
                                  <children>
-                                    <Label fx:id="zombies4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0">
+                                    <Label fx:id="zombies4" alignment="TOP_LEFT" prefHeight="2000.0" prefWidth="131.0" wrapText="true">
                                        <font>
                                           <Font name="Baskerville Old Face" size="12.0" />
                                        </font>
