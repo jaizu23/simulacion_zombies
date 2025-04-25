@@ -177,7 +177,7 @@
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar" textFill="#1b1a1a">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
@@ -195,7 +195,7 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="esperandoTunel1" alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0" textFill="#080808">
+                        <Label fx:id="esperandoTunel1" alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="12.0" />
                            </font>
@@ -218,7 +218,7 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="#181818">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
@@ -236,7 +236,7 @@
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
@@ -254,7 +254,7 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="tunel2" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0">
+                        <Label fx:id="tunel2" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="13.0" />
                            </font>
@@ -272,12 +272,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="esperandoTunel2" alignment="CENTER" layoutX="104.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0" textFill="#030303">
+                        <Label fx:id="esperandoTunel2" alignment="CENTER" layoutX="104.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="12.0" />
                            </font>
@@ -295,7 +295,7 @@
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
@@ -313,7 +313,7 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="tunel3" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0">
+                        <Label fx:id="tunel3" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="13.0" />
                            </font>
@@ -331,12 +331,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="#0d0d0d">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="esperandoTunel3" alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0">
+                        <Label fx:id="esperandoTunel3" alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="30.0" prefWidth="132.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="12.0" />
                            </font>
@@ -354,7 +354,7 @@
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="13.0" prefHeight="30.0" prefWidth="132.0" text="Listos para pasar" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
@@ -372,7 +372,7 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label fx:id="tunel4" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0">
+                        <Label fx:id="tunel4" alignment="CENTER" layoutX="118.0" layoutY="88.0" prefHeight="29.0" prefWidth="106.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="13.0" />
                            </font>
@@ -390,12 +390,12 @@
                               </AnchorPane>
                            </content>
                         </ScrollPane>
-                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel">
+                        <Label alignment="CENTER" layoutX="104.0" layoutY="74.0" prefHeight="18.0" prefWidth="132.0" text="En el túnel" textFill="WHITE">
                            <font>
                               <Font name="Sylfaen" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="esperandoTunel4" alignment="CENTER" layoutX="104.0" layoutY="34.0" prefHeight="30.0" prefWidth="132.0">
+                        <Label fx:id="esperandoTunel4" alignment="CENTER" layoutX="104.0" layoutY="34.0" prefHeight="30.0" prefWidth="132.0" textFill="WHITE">
                            <font>
                               <Font name="Baskerville Old Face" size="12.0" />
                            </font>
