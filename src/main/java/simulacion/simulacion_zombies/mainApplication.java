@@ -19,7 +19,7 @@ public class mainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("main-view.fxml"));
         fxmlLoader.setController(new mainViewController(mapa));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 576);
-        stage.setTitle("Hello!");
+        stage.setTitle("Apocalipsis");
         stage.setScene(scene);
         stage.show();
 

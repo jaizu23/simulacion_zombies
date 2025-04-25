@@ -9,18 +9,19 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class LabelUpdateConcurrentHashMapArray<V> extends ArrayList<ConcurrentHashMap<String, V>>{
+public class LabelUpdateConcurrentHashMapArray<V> extends CopyOnWriteArrayList<ConcurrentHashMap<String, V>> {
 
     private Label label = null;
 
     public LabelUpdateConcurrentHashMapArray() {}
 
-    public LabelUpdateConcurrentHashMapArray(ArrayList<ConcurrentHashMap<String, V>> listaMapas){
+    public LabelUpdateConcurrentHashMapArray(CopyOnWriteArrayList<ConcurrentHashMap<String, V>> listaMapas){
         super(listaMapas);
     }
 
-    public LabelUpdateConcurrentHashMapArray(ArrayList<ConcurrentHashMap<String, V>> listaMapas, Label label) {
+    public LabelUpdateConcurrentHashMapArray(CopyOnWriteArrayList<ConcurrentHashMap<String, V>> listaMapas, Label label) {
         super(listaMapas);
         this.label = label;
     }
