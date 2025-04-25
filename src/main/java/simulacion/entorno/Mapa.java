@@ -32,7 +32,7 @@ public class Mapa extends Thread{
     public void run () {
         Zombie zombie = new Zombie("Z0000", this);
         zombie.start();
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 100; i++) {
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
             logger.info(humano.getIdHumano() + " ha nacido.");
