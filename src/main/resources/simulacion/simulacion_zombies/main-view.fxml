@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="576.0" fitWidth="343.0" pickOnBounds="true">
                <image>
-                  <Image url="@images/refugio1.jpg" />
+                  <Image url="@../images/refugio.jpg" />
                </image>
             </ImageView>
             <AnchorPane fx:id="anchor_left" prefWidth="341.0">
@@ -152,7 +152,7 @@
                <children>
                   <ImageView fitHeight="67.0" fitWidth="344.0" pickOnBounds="true">
                      <image>
-                        <Image url="@images/tunnel_surface1.jpg" />
+                        <Image url="@../images/superficie.jpg" />
                      </image></ImageView>
                   <Label alignment="CENTER" prefHeight="70.0" prefWidth="343.0" text="TÚNELES">
                      <font>
@@ -172,7 +172,7 @@
                <children>
                   <ImageView fitHeight="127.0" fitWidth="344.0" pickOnBounds="true">
                      <image>
-                        <Image url="@images/tunel1.png" />
+                        <Image url="@../images/tunel.png" />
                      </image>
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
@@ -231,7 +231,7 @@
                <children>
                   <ImageView fitHeight="127.0" fitWidth="344.0" pickOnBounds="true">
                      <image>
-                        <Image url="@images/tunel1.png" />
+                        <Image url="@../images/tunel.png" />
                      </image>
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
@@ -290,7 +290,7 @@
                <children>
                   <ImageView fitHeight="127.0" fitWidth="344.0" pickOnBounds="true">
                      <image>
-                        <Image url="@images/tunel1.png" />
+                        <Image url="@../images/tunel.png" />
                      </image>
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
@@ -349,7 +349,7 @@
                <children>
                   <ImageView fitHeight="127.0" fitWidth="344.0" pickOnBounds="true">
                      <image>
-                        <Image url="@images/tunel1.png" />
+                        <Image url="@../images/tunel.png" />
                      </image>
                   </ImageView>
                   <AnchorPane prefHeight="125.0" prefWidth="342.0">
@@ -410,7 +410,7 @@
          <children>
             <ImageView fitHeight="576.0" fitWidth="342.0" pickOnBounds="true">
                <image>
-                  <Image url="@images/zona_riesgo4jpg.jpg" />
+                  <Image url="@../images/zona_riesgo.jpg" />
                </image>
             </ImageView>
             <VBox fx:id="Vbox_mid1" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="342.0">
