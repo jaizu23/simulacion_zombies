@@ -39,6 +39,10 @@ public class Humano extends Thread implements Comparable<Humano>, Ser {
         while (!mapa.isPausado()) {
             try {
                 try {
+                    if (this.marcado) {
+                        mapa.getDescanso().descansar(this, 2000, 4000);
+                        marcado = false;
+                    }
                     mapa.getZonaComun().prepararse(this);
 
                     int zona = r.nextInt(0, 4);
