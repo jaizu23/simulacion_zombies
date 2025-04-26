@@ -1,21 +1,14 @@
 package simulacion.simulacion_zombies;
 
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.entorno.Mapa;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMapArray;
 import simulacion.seres.Humano;
 import simulacion.seres.Zombie;
 
@@ -23,7 +16,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class mainViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger(mainViewController.class);
@@ -94,7 +86,7 @@ public class mainViewController implements Initializable {
     @FXML
     private Label zombies4;
 
-    private Mapa mapa;
+    private final Mapa mapa;
 
     public mainViewController(Mapa mapa) {
         this.mapa = mapa;
@@ -137,7 +129,7 @@ public class mainViewController implements Initializable {
         ArrayList<Label> zombiesLabels = new ArrayList<>(List.of(zombies1, zombies2, zombies3, zombies4));
 
         for (int i = 0; i < 4; i++) {
-            LabelUpdateConcurrentHashMapArray<Humano> humanosR = mapa.getZonasRiesgo()[i].getHumanos();
+            LabelUpdateConcurrentHashMap<Humano> humanosR = mapa.getZonasRiesgo()[i].getHumanos();
             humanosR.setLabel(humanosLabels.get(i));
 
             LabelUpdateConcurrentHashMap<Zombie> zombiesR = mapa.getZonasRiesgo()[i].getZombies();

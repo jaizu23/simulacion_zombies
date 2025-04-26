@@ -5,17 +5,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import simulacion.entorno.Mapa;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
 import simulacion.exceptions.killedHumanException;
 import simulacion.seres.Humano;
 
 import java.util.concurrent.*;
 
-import static java.lang.Thread.sleep;
-
-public class Tunel {
+public class Tunel extends Thread{
     private static final Logger logger = LogManager.getLogger(Tunel.class);
-    private final int id;
+    private final int zona;
 
     private final StringProperty idHumanoTunel = new SimpleStringProperty();
 
@@ -28,80 +27,105 @@ public class Tunel {
     private final CyclicBarrier barrera = new CyclicBarrier(3);
     private final Semaphore semaforo = new Semaphore(3);
 
-    public Tunel (int id) {
-        this.id = id;
+    private final Mapa mapa;
+
+    public Tunel (int zona, Mapa mapa) {
+        this.zona = zona;
+        this.mapa = mapa;
     }
 
     private synchronized void pasar () throws InterruptedException {
         Humano humano = colaTunel.take();
         String idHumano = humano.getIdHumano();
+        mapa.getZonasRiesgo()[zona].getPosiblesVictimas().remove(idHumano);
+        boolean ladoSeguro = humanosEsperando.containsKey(idHumano); // Si el humano que pasa está esperando en el lado seguro liberaremos un permiso del semáforo
         try {
-            boolean ladoSeguro = humanosEsperando.remove(idHumano) != null; // Si el humano a borrar está en el lado seguro liberaremos un permiso del semáforo
+            humanosEsperando.remove(idHumano);
             humanosRiesgo.remove(idHumano);
-            logger.info("{} está pasando por el tunel {}", idHumano, id);
+            logger.info("{} está pasando por el tunel {}", idHumano, zona);
             Platform.runLater(() -> idHumanoTunel.set(idHumano));
             sleep(1000);
             Platform.runLater(() -> idHumanoTunel.set(""));
-            logger.info("{} ha salido del tunel {}", idHumano, id);
-
+            logger.info("{} ha salido del tunel {}", idHumano, zona);
+            humano.getHaPasadoTunel().set(true);
+            humano.interrupt();
             if (ladoSeguro) {
-                semaforo.release();
+                mapa.getZonasRiesgo()[zona].getPosiblesVictimas().put(idHumano, humano);
             }
         } catch (InterruptedException e) {
-            if (humano.isAsesinado()) {
-                throw new killedHumanException();
+            if (humano.getAsesinado().get() || humano.getMarcado().get()) {
+                humano.interrupt();
             } else {
-                logger.error("El humano {} ha sido interrumpido mientras pasaba el tunel {}: {}", idHumano, id, e.getMessage());
+                logger.error("{} ha sido interrumpido mientras pasaba por el tunel {}", idHumano, zona);
+            }
+        } finally {
+            if (ladoSeguro) {
+                semaforo.release();
             }
         }
     }
 
-    public void esperarSeguro (Humano humano) {
+    public void esperarSeguro (Humano humano){
         try {
             String idHumano = humano.getIdHumano();
             humanosSeguros.put(idHumano, humano);
-            logger.info("{} está esperando a encontrar grupo para pasar por el túnel {} para entrar a la zona de riesgo", idHumano, id);
+            logger.info("{} está esperando a encontrar grupo para pasar por el túnel {} para entrar a la zona de riesgo", idHumano, zona);
 
             semaforo.acquire(); // No deja pasar a 3 hilos a la barrera (de forma que la barrera bajaría) hasta que todos los hilos del grupo anterior han pasado
             barrera.await();
-            logger.info("{} ha encontrado grupo para pasar por el túnel {} a la zona de riesgo", idHumano, id);
+            logger.info("{} ha encontrado grupo para pasar por el túnel {} a la zona de riesgo", idHumano, zona);
 
             humanosSeguros.remove(idHumano);
 
             humanosEsperando.put(idHumano, humano);
 
             humano.setPrioridadTunel(1);
-            colaTunel.add(humano);
-
-            pasar();
+            colaTunel.put(humano);
+            try {
+                synchronized (humano) {
+                    humano.wait();
+                }
+            } catch (InterruptedException e) {
+                if (!humano.getHaPasadoTunel().get()) {
+                    logger.error("{} ha sido interrumpido mientras pasaba el túnel {} desde el lado seguro", idHumano, zona);
+                }
+            }
         } catch (InterruptedException | BrokenBarrierException e) {
-            if (humano.isAsesinado()) {
+            if (humano.getAsesinado().get()) {
                 logger.error("{} asesinado en zona segura", humano.getIdHumano());
             }
-            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {} esperando en zona segura: {}", humano.getIdHumano(), id, e.getMessage());
+            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {} esperando en zona segura: {}", humano.getIdHumano(), zona, e.getMessage());
         }
     }
 
-    public void esperarRiesgo (Humano humano) {
+    public void esperarRiesgo (Humano humano) throws killedHumanException {
         humano.setPrioridadTunel(0);
-        colaTunel.add(humano);
-
         String idHumano = humano.getIdHumano();
-        logger.info("{} está esperando a a pasar por el túnel {} para volver a la zona segura", idHumano, id);
+        logger.info("{} está esperando a a pasar por el túnel {} para volver a la zona segura", idHumano, zona);
+
         humanosRiesgo.put(idHumano, humano);
+        colaTunel.put(humano);
         try {
-            pasar();
-        } catch (InterruptedException e) {
-            if (humano.isAsesinado()) {
-                humanosRiesgo.remove(idHumano);
-                throw new killedHumanException();
+            synchronized (humano) {
+                humano.wait();
             }
-            logger.error("El humano {} ha sido interrumpido mientras esperaba a pasar el tunel {} esperando en zona de riesgo: {}", humano.getIdHumano(), id, e.getMessage());
+        } catch (InterruptedException e) {
+            if (humano.getAsesinado().get()) {
+                throw new killedHumanException();
+            } else if (!humano.getMarcado().get() && !humano.getHaPasadoTunel().get()) {
+                    logger.error("{} interrumpido al pasar el túnel {} por razón inesperada", humano.getIdHumano(), zona);
+            }
         }
     }
 
-    public int getId() {
-        return id;
+    public void run () {
+        while (!mapa.isPausado()) {
+            try {
+                pasar();
+            } catch (InterruptedException e) {
+                logger.error("Ha ocurrido un error en la ejecución del túnel");
+            }
+        }
     }
 
     public StringProperty getIdHumanoTunel() {

@@ -25,17 +25,20 @@ public class Mapa extends Thread{
     public Mapa () {
         for (int i = 0; i < 4; i++) {
             zonasRiesgo[i] = new ZonaRiesgo(i);
-            tuneles[i] = new Tunel(i);
+            tuneles[i] = new Tunel(i, this);
         }
     }
 
     public void run () {
+        for (int i = 0; i < 4; i++) {
+            tuneles[i].start();
+        }
         Zombie zombie = new Zombie("Z0000", this);
         zombie.start();
         for (int i = 1; i < 100; i++) {
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
-            logger.info(humano.getIdHumano() + " ha nacido.");
+            logger.info("{} ha nacido.", humano.getIdHumano());
             try {
                 sleep(r.nextInt(0, 500));
             } catch (InterruptedException e) {
@@ -43,6 +46,8 @@ public class Mapa extends Thread{
             }
         }
     }
+
+
 
     public Comedor getComedor() {
         return comedor;

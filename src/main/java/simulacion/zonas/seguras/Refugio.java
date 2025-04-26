@@ -3,7 +3,6 @@ package simulacion.zonas.seguras;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.exceptions.killedHumanException;
 import simulacion.seres.Humano;
 
 import java.util.Random;
@@ -19,9 +18,6 @@ public abstract class Refugio {
             logger.info("{} está pasando tiempo en la zona {}", id, this.getClass().getSimpleName());
             Thread.sleep(r.nextInt(inf, sup));
         } catch (InterruptedException e) {
-            if (humano.isAsesinado()) {
-                throw new killedHumanException();
-            }
             logger.error("Error mientras el {} pasaba tiempo en la zona {}: {}", id, this.getClass().getSimpleName(), e);
         }
     }

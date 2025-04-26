@@ -8,6 +8,7 @@ import simulacion.exceptions.killedHumanException;
 import simulacion.exceptions.unexpectedPriorityException;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Humano extends Thread implements Comparable<Humano>, Ser {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
@@ -22,53 +23,66 @@ public class Humano extends Thread implements Comparable<Humano>, Ser {
 
     private final Mapa mapa;
 
-    private boolean marcado = false;
+    private int duracionAtaque;
 
-    private boolean asesinado = false;
+    private final AtomicBoolean haPasadoTunel = new AtomicBoolean();
+    private final AtomicBoolean marcado = new AtomicBoolean(false);
+    private final AtomicBoolean asesinado = new AtomicBoolean(false);
 
     public Humano(String id, Mapa mapa) {
         this.id = id;
         this.mapa = mapa;
     }
 
-    public void marcar() {
-        marcado = true;
-    }
-
     public void run() {
         while (!mapa.isPausado()) {
             try {
                 try {
-                    if (this.marcado) {
-                        mapa.getDescanso().descansar(this, 2000, 4000);
-                        marcado = false;
-                    }
                     mapa.getZonaComun().prepararse(this);
 
                     int zona = r.nextInt(0, 4);
-                    mapa.getTuneles()[zona].esperarSeguro(this);
+
+                    haPasadoTunel.set(false);
+                    while (!haPasadoTunel.get()) {
+                        mapa.getTuneles()[zona].esperarSeguro(this);
+                    }
 
                     mapa.getZonasRiesgo()[zona].entrarZonaRiesgo(this);
                     mapa.getZonasRiesgo()[zona].recolectarComida(this);
-
-                    mapa.getTuneles()[zona].esperarRiesgo(this);
                     mapa.getZonasRiesgo()[zona].salirZonaRiesgo(id, true);
 
+                    haPasadoTunel.set(false);
+                    while (!haPasadoTunel.get()) {
+                        mapa.getTuneles()[zona].esperarRiesgo(this);
+                    }
                     mapa.getComedor().depositarComida(this);
 
                     mapa.getDescanso().descansar(this, 2000, 4000);
 
                     mapa.getComedor().comer(this);
+
+                    if (marcado.get()) {
+                        mapa.getDescanso().descansar(this, 2000, 4000);
+                        marcado.set(false);
+                    }
                 } catch (killedHumanException e) {
-                    logger.info("El humano {} ha sido asesinado.", id);
+                    logger.info("{} ha sido asesinado.", id);
                     break;
                 }
             } catch (Exception e) {
-                logger.error("La ejecución del humano {} ha sido interrumpida inesperadamente: {}", id, e);
+                logger.error("La ejecución de {} ha sido interrumpida inesperadamente: {}", id, e);
             }
         }
     }
 
+    public void serAtacado () {
+        try {
+            interrupted();
+            sleep(duracionAtaque);
+        } catch (InterruptedException e) {
+            logger.error("La ejecución de {} ha sido interrumpida inesperadamente mientras era atacado de forma no mortal: {}", id, e);
+        }
+    }
 
     @Override
     public int compareTo(@NotNull Humano otro) {
@@ -91,14 +105,6 @@ public class Humano extends Thread implements Comparable<Humano>, Ser {
         return id;
     }
 
-    public Boolean getMarcado() {
-        return marcado;
-    }
-
-    public Mapa getMapa() {
-        return mapa;
-    }
-
     public int getComida() {
         return comida;
     }
@@ -107,11 +113,19 @@ public class Humano extends Thread implements Comparable<Humano>, Ser {
         this.comida += comida;
     }
 
-    public boolean isAsesinado() {
+    public synchronized AtomicBoolean getMarcado() {
+        return marcado;
+    }
+
+    public synchronized AtomicBoolean getAsesinado() {
         return asesinado;
     }
 
-    public void setAsesinado(boolean asesinado) {
-        this.asesinado = asesinado;
+    public void setDuracionAtaque(int duracionAtaque) {
+        this.duracionAtaque = duracionAtaque;
+    }
+
+    public AtomicBoolean getHaPasadoTunel() {
+        return haPasadoTunel;
     }
 }
