@@ -1,0 +1,4 @@
+Si hay que implementar los humanos como Threads, se puede usar un ExecutorService e implementar Humano como runnable y pasarlo al ThreadPool?
+
+Un humano puede ser atacado esperando al túnel de vuelta? En ese caso:
+Si un humano es atacado mientras espera en el tunel de vuelta, vuelve a esperar la cola o pasa directamente? Un humano puede ser atacado dos veces en la misma ida a la zona de riesgo?

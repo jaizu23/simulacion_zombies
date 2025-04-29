@@ -2,7 +2,6 @@ package simulacion.estructuras_de_datos;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 import simulacion.exceptions.uninitializedLabelUpdateConcurrentHashMap;
 
@@ -16,15 +15,6 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
 
     public LabelUpdateConcurrentHashMap(int n) {
         super(n);
-    }
-
-    public LabelUpdateConcurrentHashMap(Label label) {
-        this.label = label;
-    }
-
-    public LabelUpdateConcurrentHashMap(Label label, int n) {
-        super(n);
-        this.label = label;
     }
 
     @Override

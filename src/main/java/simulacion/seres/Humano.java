@@ -10,7 +10,7 @@ import simulacion.exceptions.unexpectedPriorityException;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Humano extends Thread implements Comparable<Humano>, Ser {
+public class Humano extends Thread implements Comparable<Humano> {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
 
     private final Random r = new Random();
@@ -42,14 +42,12 @@ public class Humano extends Thread implements Comparable<Humano>, Ser {
 
                     int zona = r.nextInt(0, 4);
 
-                    haPasadoTunel.set(false);
-                    while (!haPasadoTunel.get()) {
-                        mapa.getTuneles()[zona].esperarSeguro(this);
-                    }
+                    mapa.getTuneles()[zona].esperarSeguro(this);
+                    mapa.getZonasRiesgo()[zona].entrarHumano(this);
 
-                    mapa.getZonasRiesgo()[zona].entrarZonaRiesgo(this);
                     mapa.getZonasRiesgo()[zona].recolectarComida(this);
-                    mapa.getZonasRiesgo()[zona].salirZonaRiesgo(id, true);
+
+                    mapa.getZonasRiesgo()[zona].salir(id, true);
 
                     haPasadoTunel.set(false);
                     while (!haPasadoTunel.get()) {

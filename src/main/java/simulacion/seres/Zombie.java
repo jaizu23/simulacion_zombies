@@ -6,7 +6,7 @@ import simulacion.entorno.Mapa;
 
 import java.util.Random;
 
-public class Zombie extends Thread implements Ser{
+public class Zombie extends Thread {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
 
     Random r = new Random();
@@ -48,7 +48,7 @@ public class Zombie extends Thread implements Ser{
         }
         try {
             while (!mapa.isPausado()) {
-                mapa.getZonasRiesgo()[zona].entrarZonaRiesgo(this);
+                mapa.getZonasRiesgo()[zona].entrarZombie(this);
                 if (hayHumanosDisponibles()) {
                     atacar();
                 }
@@ -58,11 +58,11 @@ public class Zombie extends Thread implements Ser{
                 if (nuevaPosicion >= zona) {
                     nuevaPosicion++;
                 }
-                mapa.getZonasRiesgo()[zona].salirZonaRiesgo(idZombie, false);
+                mapa.getZonasRiesgo()[zona].salir(idZombie, false);
                 zona = nuevaPosicion;
             }
         } catch (Exception e) {
-            logger.error("Se ha interrumpido la ejecución del Zombie: {}", idZombie);
+            logger.error("Se ha interrumpido inesperadamente la ejecución de {}", idZombie);
         }
 
     }
@@ -79,12 +79,12 @@ public class Zombie extends Thread implements Ser{
         try {
             victima.join(); //esperamos a que el humano muera completamente.
         } catch (InterruptedException e) {
-            logger.error("Problema de {}", nuevoId);
+            logger.error("Error de {} esperando mientras {} moría", idZombie, victima.getIdHumano());
         }
         try {
             Thread.sleep(tiempo);
         } catch (InterruptedException e) {
-            logger.error("Se ha producido un error mientras {} asesinaba a {}", idZombie, victima.getIdHumano());
+            logger.error("Se ha producido un error mientras {} atacaba mortalmente a {}", idZombie, victima.getIdHumano());
         }
         generarZombie(nuevoId);
     }
@@ -103,7 +103,7 @@ public class Zombie extends Thread implements Ser{
     public void atacar() {
         int duracionAtaque = r.nextInt(500, 1501);
         Humano victima = mapa.getZonasRiesgo()[zona].elegirVictima();
-        logger.info("{} está siendo atacado por el zombie {}", victima.getIdHumano(), idZombie);
+        logger.info("{} está siendo atacado por el zombie {} (número de muertes: {})", victima.getIdHumano(), idZombie, contadorMuertes);
         try {
             victima.getMarcado().set(true);
             logger.info("{} es marcado por el zombie {}", victima.getIdHumano(), idZombie);
@@ -120,11 +120,7 @@ public class Zombie extends Thread implements Ser{
                 sleep(duracionAtaque);
             }
         } catch (Exception e) {
-            if (victima.getAsesinado().get()) {
-                logger.error("Excepcion de {} {}", idZombie, victima.getIdHumano());
-            } else {
-                logger.error("Se ha producido un error cuando {} atacaba al humano {}", idZombie, victima.getIdHumano());
-            }
+            logger.error("Se ha producido un error cuando {} atacaba al humano {}", idZombie, victima.getIdHumano());
         }
     }
 }

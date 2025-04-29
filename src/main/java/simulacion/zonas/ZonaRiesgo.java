@@ -2,11 +2,9 @@ package simulacion.zonas;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.entorno.Mapa;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
 import simulacion.exceptions.killedHumanException;
 import simulacion.seres.Humano;
-import simulacion.seres.Ser;
 import simulacion.seres.Zombie;
 
 import java.util.*;
@@ -28,7 +26,7 @@ public class ZonaRiesgo {
         this.zona = zona;
     }
 
-    public void recolectarComida (Humano humano){
+    public void recolectarComida (Humano humano) throws killedHumanException{
         String id = humano.getIdHumano();
         logger.info("{} está recolectando comida en la zona de riesgo {}", id, this.zona);
         try {
@@ -37,7 +35,7 @@ public class ZonaRiesgo {
             logger.info("{} ha terminado de recolectar comida en la zona de riesgo {}", id, this.zona);
         } catch (InterruptedException e) {
             if (humano.getAsesinado().get()) {
-                salirZonaRiesgo(id, true);
+                salir(id, true);
                 throw new killedHumanException();
             } else if (humano.getMarcado().get()) {
                 humano.serAtacado();
@@ -47,22 +45,23 @@ public class ZonaRiesgo {
         }
     }
 
-    public void entrarZonaRiesgo (Ser ser) {
-        String id;
-        if (ser.getClass() == Humano.class) {
-            id = ((Humano) ser).getIdHumano();
+    public void entrarHumano (Humano humano) {
+        String id = humano.getIdHumano();
 
-            posiblesVictimas.put(id, (Humano) ser);
-            humanos.put(id, (Humano) ser);
-        } else {
-            id = ((Zombie) ser).getIdZombie();
+        posiblesVictimas.put(id, humano);
+        humanos.put(id, humano);
 
-            zombies.put(id, (Zombie) ser);
-        }
         logger.info("{} ha entrado en la zona de riesgo {}", id, this.zona);
     }
 
-    public void salirZonaRiesgo (String id, boolean humano) {
+    public void entrarZombie (Zombie zombie) {
+        String id = zombie.getIdZombie();
+
+        zombies.put(id, zombie);
+        logger.info("{} ha entrado en la zona de riesgo {}", id, this.zona);
+    }
+
+    public void salir (String id, boolean humano) {
         if (humano) {
             humanos.remove(id);
         } else  {
@@ -72,7 +71,6 @@ public class ZonaRiesgo {
     }
 
     public synchronized Humano elegirVictima() {
-
         ArrayList<String> claves = new ArrayList<>(posiblesVictimas.keySet());
 
         int nVictima = r.nextInt(claves.size());

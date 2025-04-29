@@ -32,7 +32,7 @@ public class Comedor extends Refugio{
         try {
             semaforoComida.acquire();
         } catch (InterruptedException e) {
-            logger.error("Error mientras el humano {} comia", id);
+            logger.error("Error mientras {} comía", id);
         }
         synchronized (contadorComida) {
             Platform.runLater(() -> contadorComida.set(contadorComida.get() - 1));

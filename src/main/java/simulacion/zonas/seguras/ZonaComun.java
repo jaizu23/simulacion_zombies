@@ -1,11 +1,7 @@
 package simulacion.zonas.seguras;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
 import simulacion.seres.Humano;
-
-import java.util.Random;
 
 public class ZonaComun extends Refugio{
     private final LabelUpdateConcurrentHashMap<Humano> humanosComun = new LabelUpdateConcurrentHashMap<>(10000);

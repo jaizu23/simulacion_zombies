@@ -35,12 +35,12 @@ public class Mapa extends Thread{
         }
         Zombie zombie = new Zombie("Z0000", this);
         zombie.start();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 10000; i++) {
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
             logger.info("{} ha nacido.", humano.getIdHumano());
             try {
-                sleep(r.nextInt(0, 500));
+                sleep(r.nextInt(500, 2000));
             } catch (InterruptedException e) {
                 logger.error("Se ha interrumpido un hilo mientras esperaba al crear los humanos{}", String.valueOf(e));
             }
