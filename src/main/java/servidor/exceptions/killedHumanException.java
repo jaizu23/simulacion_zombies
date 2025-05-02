@@ -1,4 +1,4 @@
-package simulacion.exceptions;
+package servidor.exceptions;
 
 public class killedHumanException extends RuntimeException {
 }

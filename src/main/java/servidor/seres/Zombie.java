@@ -1,8 +1,8 @@
-package simulacion.seres;
+package servidor.seres;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.entorno.Mapa;
+import servidor.entorno.Mapa;
 
 import java.util.Random;
 
