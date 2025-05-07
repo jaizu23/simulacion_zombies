@@ -31,7 +31,7 @@ public class ZonaRiesgo {
         logger.info("{} está recolectando comida en la zona de riesgo {}", id, this.zona);
         try {
             Thread.sleep(r.nextInt(3000, 5000));
-            humano.añadirComida(2);
+            humano.añadirComida(4);
             logger.info("{} ha terminado de recolectar comida en la zona de riesgo {}", id, this.zona);
         } catch (InterruptedException e) {
             if (humano.getAsesinado().get()) {
