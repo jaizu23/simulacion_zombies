@@ -1,0 +1,77 @@
+@startuml
+class Humano {
++ Humano(id: String, mapa: Mapa)
++ void run()
++ void serAtacado()
++ int compareTo(Humano otro)
++ void añadirComida(int)
+}
+
+class Zombie {
++ Zombie(String id, Mapa mapa)
++ Zombie(String id, Mapa mapa, int zona)
++ void run()
++ boolean hayHumanosDisponibles()
++ void atacar()
++ int getContadorMuertes()
++ void sumarContadorMuertes()
+}
+
+class Mapa {
++ Mapa()
++ void run()
++ boolean isPausado()
+}
+
+class ZonaRiesgo {
++ ZonaRiesgo(int zona)
++ void recolectarComida(Humano humano) throws killedHumanException
++ void entrarHumano(Humano humano)
++ void entrarZombie(Zombie zombie)
++ void salir(String id, boolean humano)
++ Humano elegirVictima()
+}
+
+class Tunel {
++ Tunel(int zona, Mapa mapa)
++ void esperarSeguro(Humano humano)
++ void esperarRiesgo(Humano humano) throws killedHumanException
+- void pasarTunel() throws InterruptedException
++ void run()
+}
+
+class Comedor {
++ LabelUpdateConcurrentHashMap<Humano> getHumanosComedor()
++ IntegerProperty getContadorComida()
++ void comer(Humano humano)
++ void depositarComida(Humano humano)
+}
+
+
+class Descanso {
++ void descansar(Humano humano, int inf, int sup)
+}
+
+abstract class Refugio {
+# void pasarTiempo(Humano humano, int inf, int sup)
+# void entrarZona(LabelUpdateConcurrentHashMap<Humano> listaZona, Humano humano)
+# void salirZona(LabelUpdateConcurrentHashMap<Humano> listaZona, String id)
+}
+
+Humano --> Mapa : usa
+Mapa --> Comedor : contiene
+Mapa --> ZonaComun : contiene
+Mapa --> Descanso : contiene
+Mapa --> Zombie : crea
+Mapa --> Humano : crea
+Zombie --> Mapa : usa
+Zombie --> Humano : ataca / zombifica
+ZonaRiesgo --> Humano : usa
+ZonaRiesgo --> Zombie : usa
+ZonaRiesgo --> LabelUpdateConcurrentHashMap : contiene
+Tunel --> Humano : utiliza
+Tunel --> Mapa : referencia
+Comedor --> Humano : utiliza
+Descanso --> Humano : utiliza
+Refugio --> Humano : usa
+@enduml
