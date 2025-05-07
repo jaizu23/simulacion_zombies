@@ -1,11 +1,11 @@
-package simulacion.zonas;
+package servidor.zonas;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.exceptions.killedHumanException;
-import simulacion.seres.Humano;
-import simulacion.seres.Zombie;
+import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.exceptions.killedHumanException;
+import servidor.seres.Humano;
+import servidor.seres.Zombie;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,4 +1,4 @@
-package simulacion.entorno;
+package servidor.entorno;
 
 public class Estadisticas {
 }

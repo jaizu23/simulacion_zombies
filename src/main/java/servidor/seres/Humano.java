@@ -1,11 +1,11 @@
-package simulacion.seres;
+package servidor.seres;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import simulacion.entorno.Mapa;
-import simulacion.exceptions.killedHumanException;
-import simulacion.exceptions.unexpectedPriorityException;
+import servidor.entorno.Mapa;
+import servidor.exceptions.killedHumanException;
+import servidor.exceptions.unexpectedPriorityException;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;

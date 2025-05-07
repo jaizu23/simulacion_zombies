@@ -1,9 +1,9 @@
-package simulacion.estructuras_de_datos;
+package servidor.estructuras_de_datos;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
-import simulacion.exceptions.uninitializedLabelUpdateConcurrentHashMap;
+import servidor.exceptions.uninitializedLabelUpdateConcurrentHashMap;
 
 import java.util.concurrent.ConcurrentHashMap;
 

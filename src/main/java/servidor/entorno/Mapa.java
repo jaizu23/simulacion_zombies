@@ -1,10 +1,10 @@
-package simulacion.entorno;
+package servidor.entorno;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.seres.*;
-import simulacion.zonas.seguras.*;
-import simulacion.zonas.*;
+import servidor.seres.*;
+import servidor.zonas.seguras.*;
+import servidor.zonas.*;
 
 import java.util.Random;
 

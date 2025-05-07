@@ -1,9 +1,9 @@
-package simulacion.zonas.seguras;
+package servidor.zonas.seguras;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.seres.Humano;
+import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.seres.Humano;
 
 import java.util.Random;
 

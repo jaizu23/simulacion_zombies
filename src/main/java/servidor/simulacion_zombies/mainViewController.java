@@ -1,4 +1,4 @@
-package simulacion.simulacion_zombies;
+package servidor.simulacion_zombies;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
@@ -7,10 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.entorno.Mapa;
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.seres.Humano;
-import simulacion.seres.Zombie;
+import servidor.entorno.Mapa;
+import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.seres.Humano;
+import servidor.seres.Zombie;
 
 import java.net.URL;
 import java.util.ArrayList;

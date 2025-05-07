@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="348.0" prefWidth="1024.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1024.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="446.0" text="Nº Humanos en el refugio:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="refugio" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="97.0" prefHeight="200.0" prefWidth="1024.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="446.0" text="Nº Humanos en los túneles:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="T1:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HT1" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="T2:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HT2" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="T3:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HT3" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="T4:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HT4" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="293.0" prefHeight="200.0" prefWidth="1024.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="446.0" text="Nº Humanos en las zonas de riesgo:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z1:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HR1" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z2:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HR2" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z3:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HR3" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z4:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="HR4" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="97.0" prefHeight="200.0" prefWidth="1024.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="446.0" text="Nº Zombies en las zonas de riesgo:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z1:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ZR1" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z2:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ZR2" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z3:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ZR3" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="87.0" prefWidth="75.0" text="Z4:">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ZR4" alignment="CENTER" prefHeight="60.0" prefWidth="60.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+                     <font>
+                        <Font name="Sylfaen" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="15.0" top="15.0" />
+         </padding>
+      </VBox>
+      <AnchorPane layoutX="-30.0" layoutY="348.0" prefHeight="228.0" prefWidth="1024.0">
+         <children>
+            <Label alignment="CENTER" layoutX="115.0" layoutY="-4.0" prefHeight="39.0" prefWidth="356.0" text="Zombies más letales:">
+               <font>
+                  <Font name="Sylfaen" size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="pausarEjecucion" layoutX="668.0" layoutY="57.0" mnemonicParsing="false" prefHeight="116.0" prefWidth="291.0" text="Detener/reanudar ejecución" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Sylfaen" size="29.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="83.0" layoutY="35.0" prefHeight="157.0" prefWidth="455.0" style="-fx-border-color: grey; -fx-border-width: 2;">
+               <children>
+                  <Label fx:id="rankingZombies" alignment="CENTER" prefHeight="158.0" prefWidth="410.0" text="Z0001 - 5 muertes&#10;Z0001 - 5 muertes&#10;Z0001 - 5 muertes&#10;">
+                     <font>
+                        <Font name="Fira Code Light" size="31.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="399.0" layoutY="16.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/oro.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="39.0" fitWidth="29.0" layoutX="401.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/plata.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="39.0" fitWidth="60.0" layoutX="402.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bronce.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

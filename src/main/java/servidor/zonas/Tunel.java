@@ -1,14 +1,14 @@
-package simulacion.zonas;
+package servidor.zonas;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import simulacion.entorno.Mapa;
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.exceptions.killedHumanException;
-import simulacion.seres.Humano;
+import servidor.entorno.Mapa;
+import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.exceptions.killedHumanException;
+import servidor.seres.Humano;
 
 import java.util.concurrent.*;
 

@@ -1,7 +1,7 @@
-package simulacion.zonas.seguras;
+package servidor.zonas.seguras;
 
-import simulacion.estructuras_de_datos.LabelUpdateConcurrentHashMap;
-import simulacion.seres.Humano;
+import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.seres.Humano;
 
 public class Descanso extends Refugio{
     private final LabelUpdateConcurrentHashMap<Humano> humanosDescanso = new LabelUpdateConcurrentHashMap<>(10000);
