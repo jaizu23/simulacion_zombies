@@ -58,6 +58,10 @@ abstract class Refugio {
 # void salirZona(LabelUpdateConcurrentHashMap<Humano> listaZona, String id)
 }
 
+class ZonaComun {
++prepararse(Humano humano)
+}
+
 Humano --> Mapa : usa
 Mapa --> Comedor : contiene
 Mapa --> ZonaComun : contiene
@@ -68,7 +72,6 @@ Zombie --> Mapa : usa
 Zombie --> Humano : ataca / zombifica
 ZonaRiesgo --> Humano : usa
 ZonaRiesgo --> Zombie : usa
-ZonaRiesgo --> LabelUpdateConcurrentHashMap : contiene
 Tunel --> Humano : utiliza
 Tunel --> Mapa : referencia
 Comedor --> Humano : utiliza
