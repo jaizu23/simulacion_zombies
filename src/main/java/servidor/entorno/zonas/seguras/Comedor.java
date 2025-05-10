@@ -1,4 +1,4 @@
-package servidor.zonas.seguras;
+package servidor.entorno.zonas.seguras;
 
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;

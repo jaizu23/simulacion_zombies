@@ -22,9 +22,9 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
-            V result = super.put(key, value);
+            V result = super.put(key, value); // Ya es Thread-safe
             updateLabel();
-            return result; // Ya es Thread-safe
+            return result;
         }
     }
 
@@ -32,9 +32,9 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         if (label == null) {
             throw new uninitializedLabelUpdateConcurrentHashMap();
         } else {
-            V result = super.remove(key);
+            V result = super.remove(key); // Ya es Thread-safe
             updateLabel();
-            return result; // Ya es Thread-safe
+            return result;
         }
     }
 

@@ -48,16 +48,20 @@ public class Zombie extends Thread {
         }
         try {
             while (!mapa.isPausado()) {
+                comprobarPausado();
                 mapa.getZonasRiesgo()[zona].entrarZombie(this);
+                comprobarPausado();
                 if (hayHumanosDisponibles()) {
                     atacar();
                 }
                 int espera = r.nextInt(2000, 3001);
+                comprobarPausado();
                 Thread.sleep(espera);
                 int nuevaPosicion = r.nextInt(3);
                 if (nuevaPosicion >= zona) {
                     nuevaPosicion++;
                 }
+                comprobarPausado();
                 mapa.getZonasRiesgo()[zona].salir(idZombie, false);
                 zona = nuevaPosicion;
             }
@@ -71,21 +75,24 @@ public class Zombie extends Thread {
         return (!mapa.getZonasRiesgo()[zona].getPosiblesVictimas().isEmpty());
     }
 
-    private void zombificar (Humano victima, int tiempo) {
-        String nuevoId = "Z" + victima.getIdHumano().substring(1);
-        victima.getAsesinado().set(true);
-        logger.info("{} va a interrumpir a {}", idZombie, victima.getIdHumano());
+
+    private void realizarAtaque (Humano victima, int tiempo) {
         victima.interrupt();
-        try {
-            victima.join(); //esperamos a que el humano muera completamente.
-        } catch (InterruptedException e) {
-            logger.error("Error de {} esperando mientras {} moría", idZombie, victima.getIdHumano());
-        }
         try {
             Thread.sleep(tiempo);
         } catch (InterruptedException e) {
             logger.error("Se ha producido un error mientras {} atacaba mortalmente a {}", idZombie, victima.getIdHumano());
         }
+        synchronized (victima) {
+            victima.notify();
+        }
+    }
+
+    private void zombificar (Humano victima, int tiempo) {
+        String nuevoId = "Z" + victima.getIdHumano().substring(1);
+        victima.getAsesinado().set(true);
+        logger.info("{} va a interrumpir a {}", idZombie, victima.getIdHumano());
+        realizarAtaque(victima, tiempo);
         generarZombie(nuevoId);
     }
 
@@ -93,11 +100,6 @@ public class Zombie extends Thread {
         Zombie nuevoZombie = new Zombie(id, mapa, zona);
         nuevoZombie.start();
         logger.info("{} ha nacido por asesinato.", nuevoZombie.getIdZombie());
-    }
-
-    private void notificar_ataque (Humano victima, int duracionAtaque) {
-        victima.setDuracionAtaque(duracionAtaque);
-        victima.interrupt();
     }
 
     public void atacar() {
@@ -116,11 +118,24 @@ public class Zombie extends Thread {
                 logger.info("{} ha muerto a manos del zombie {}", victima.getIdHumano(), idZombie);
             } else {
                 logger.info("{} va a ser atacado no mortalmente por el zombie {}", victima.getIdHumano(), idZombie);
-                notificar_ataque(victima, duracionAtaque);
+                realizarAtaque(victima, duracionAtaque);
                 sleep(duracionAtaque);
             }
         } catch (Exception e) {
             logger.error("Se ha producido un error cuando {} atacaba al humano {}", idZombie, victima.getIdHumano());
+        }
+    }
+
+    private void comprobarPausado () {
+        while(mapa.isPausado()) {
+            mapa.getLockPausado().lock();
+            try {
+                mapa.getConditionPausado().await();
+            } catch (InterruptedException e) {
+                logger.error("La ejecución de {} ha sido interrumpida mientras estaba pausado", idZombie);
+            } finally {
+                mapa.getLockPausado().unlock();
+            }
         }
     }
 }

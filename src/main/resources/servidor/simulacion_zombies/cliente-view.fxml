@@ -188,7 +188,7 @@
                   <Font name="Sylfaen" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="pausarEjecucion" layoutX="668.0" layoutY="57.0" mnemonicParsing="false" prefHeight="116.0" prefWidth="291.0" text="Detener/reanudar ejecución" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="pausarEjecucion" layoutX="668.0" layoutY="57.0" mnemonicParsing="false" onAction="#onPausarBoton" prefHeight="116.0" prefWidth="291.0" text="Detener/reanudar ejecución" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Sylfaen" size="29.0" />
                </font>

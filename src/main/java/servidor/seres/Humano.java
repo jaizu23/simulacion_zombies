@@ -2,20 +2,16 @@ package servidor.seres;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 import servidor.entorno.Mapa;
 import servidor.exceptions.killedHumanException;
-import servidor.exceptions.unexpectedPriorityException;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Humano extends Thread implements Comparable<Humano> {
-    private static final Logger logger = LogManager.getLogger(Zombie.class);
+public class Humano extends Thread {
+    private static final Logger logger = LogManager.getLogger(Humano.class);
 
     private final Random r = new Random();
-
-    private int prioridadTunel = -1;
 
     private final String id;
 
@@ -23,9 +19,6 @@ public class Humano extends Thread implements Comparable<Humano> {
 
     private final Mapa mapa;
 
-    private int duracionAtaque;
-
-    private final AtomicBoolean haPasadoTunel = new AtomicBoolean();
     private final AtomicBoolean marcado = new AtomicBoolean(false);
     private final AtomicBoolean asesinado = new AtomicBoolean(false);
 
@@ -38,27 +31,32 @@ public class Humano extends Thread implements Comparable<Humano> {
         while (!mapa.isPausado()) {
             try {
                 try {
+                    comprobarPausado();
                     mapa.getZonaComun().prepararse(this);
 
                     int zona = r.nextInt(0, 4);
 
+                    comprobarPausado();
                     mapa.getTuneles()[zona].esperarSeguro(this);
+
+                    comprobarPausado();
                     mapa.getZonasRiesgo()[zona].entrarHumano(this);
-
+                    comprobarPausado();
                     mapa.getZonasRiesgo()[zona].recolectarComida(this);
-
+                    comprobarPausado();
                     mapa.getZonasRiesgo()[zona].salir(id, true);
 
-                    haPasadoTunel.set(false);
-                    while (!haPasadoTunel.get()) {
-                        mapa.getTuneles()[zona].esperarRiesgo(this);
-                    }
+                    comprobarPausado();
+                    mapa.getTuneles()[zona].esperarRiesgo(this);
+
+                    comprobarPausado();
                     mapa.getComedor().depositarComida(this);
-
+                    comprobarPausado();
                     mapa.getDescanso().descansar(this, 2000, 4000);
-
+                    comprobarPausado();
                     mapa.getComedor().comer(this);
 
+                    comprobarPausado();
                     if (marcado.get()) {
                         mapa.getDescanso().descansar(this, 2000, 4000);
                         marcado.set(false);
@@ -68,35 +66,23 @@ public class Humano extends Thread implements Comparable<Humano> {
                     break;
                 }
             } catch (Exception e) {
-                logger.error("La ejecución de {} ha sido interrumpida inesperadamente: {}", id, e);
+                logger.error("La ejecución de {} ha sido interrumpida inesperadamente:", id);
+                e.printStackTrace();
             }
         }
     }
 
-    public void serAtacado () {
-        try {
-            interrupted();
-            sleep(duracionAtaque);
-        } catch (InterruptedException e) {
-            logger.error("La ejecución de {} ha sido interrumpida inesperadamente mientras era atacado de forma no mortal: {}", id, e);
+    private void comprobarPausado() {
+        while(mapa.isPausado()) {
+            mapa.getLockPausado().lock();
+            try {
+                mapa.getConditionPausado().await();
+            } catch (InterruptedException e) {
+                logger.error("La ejecución de {} ha sido interrumpida mientras estaba pausado", id);
+            } finally {
+                mapa.getLockPausado().unlock();
+            }
         }
-    }
-
-    @Override
-    public int compareTo(@NotNull Humano otro) {
-        if (this.prioridadTunel == -1) {
-            throw new unexpectedPriorityException();
-        } else {
-            return Integer.compare(prioridadTunel, otro.getPrioridadTunel());
-        }
-    }
-
-    public int getPrioridadTunel() {
-        return prioridadTunel;
-    }
-
-    public void setPrioridadTunel(int prioridadTunel) {
-        this.prioridadTunel = prioridadTunel;
     }
 
     public String getIdHumano() {
@@ -117,13 +103,5 @@ public class Humano extends Thread implements Comparable<Humano> {
 
     public synchronized AtomicBoolean getAsesinado() {
         return asesinado;
-    }
-
-    public void setDuracionAtaque(int duracionAtaque) {
-        this.duracionAtaque = duracionAtaque;
-    }
-
-    public AtomicBoolean getHaPasadoTunel() {
-        return haPasadoTunel;
     }
 }

@@ -1,4 +1,4 @@
-package servidor.zonas;
+package servidor.entorno.zonas;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,14 +31,22 @@ public class ZonaRiesgo {
         logger.info("{} está recolectando comida en la zona de riesgo {}", id, this.zona);
         try {
             Thread.sleep(r.nextInt(3000, 5000));
-            humano.añadirComida(4);
+            humano.añadirComida(2);
             logger.info("{} ha terminado de recolectar comida en la zona de riesgo {}", id, this.zona);
         } catch (InterruptedException e) {
-            if (humano.getAsesinado().get()) {
-                salir(id, true);
-                throw new killedHumanException();
-            } else if (humano.getMarcado().get()) {
-                humano.serAtacado();
+            if (humano.getAsesinado().get() || humano.getMarcado().get()) {
+                try {
+                    synchronized (humano) {
+                        humano.wait();
+                    }
+                } catch (InterruptedException e1) {
+                    logger.error("Se ha producido un error mientras {} era atacado", id);
+                }
+                if (humano.getAsesinado().get()) {
+                    salir(id, true);
+                    throw new killedHumanException();
+                }
+                logger.info("{} ha sobrevivido de ser atacado no mortalmente", id);
             } else {
                 logger.error("Se ha producido un error cuando {} recogia comida", id);
             }
@@ -63,6 +71,7 @@ public class ZonaRiesgo {
 
     public void salir (String id, boolean humano) {
         if (humano) {
+            posiblesVictimas.remove(id);
             humanos.remove(id);
         } else  {
             zombies.remove(id);

@@ -1,4 +1,4 @@
-package servidor.zonas.seguras;
+package servidor.entorno.zonas.seguras;
 
 import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
 import servidor.seres.Humano;

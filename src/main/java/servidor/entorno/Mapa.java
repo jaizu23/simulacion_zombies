@@ -3,10 +3,14 @@ package servidor.entorno;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.seres.*;
-import servidor.zonas.seguras.*;
-import servidor.zonas.*;
+import servidor.entorno.zonas.seguras.*;
+import servidor.entorno.zonas.*;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Mapa extends Thread{
     private static final Logger logger = LogManager.getLogger(Mapa.class);
@@ -20,7 +24,9 @@ public class Mapa extends Thread{
     private final ZonaRiesgo[] zonasRiesgo = new ZonaRiesgo[4];
     private final Tunel[] tuneles = new Tunel[4];
 
-    private boolean pausado = false;
+    private final Lock lockPausado = new ReentrantLock();
+    private final Condition conditionPausado = lockPausado.newCondition();
+    private final AtomicBoolean pausado = new AtomicBoolean(false);
 
     public Mapa () {
         for (int i = 0; i < 4; i++) {
@@ -30,12 +36,10 @@ public class Mapa extends Thread{
     }
 
     public void run () {
-        for (int i = 0; i < 4; i++) {
-            tuneles[i].start();
-        }
         Zombie zombie = new Zombie("Z0000", this);
         zombie.start();
         for (int i = 1; i < 10000; i++) {
+            comprobarPausado();
             Humano humano = new Humano("H" + String.format("%04d", i),this);
             humano.start();
             logger.info("{} ha nacido.", humano.getIdHumano());
@@ -47,7 +51,18 @@ public class Mapa extends Thread{
         }
     }
 
-
+    private void comprobarPausado () {
+        while(isPausado()) {
+            getLockPausado().lock();
+            try {
+                getConditionPausado().await();
+            } catch (InterruptedException e) {
+                logger.error("La ejecución del mapa ha sido interrumpida mientras estaba pausado");
+            } finally {
+                getLockPausado().unlock();
+            }
+        }
+    }
 
     public Comedor getComedor() {
         return comedor;
@@ -70,10 +85,18 @@ public class Mapa extends Thread{
     }
 
     public boolean isPausado() {
-        return pausado;
+        return pausado.get();
     }
 
     public void setPausado(boolean pausado) {
-        this.pausado = pausado;
+        this.pausado.set(pausado);
+    }
+
+    public Condition getConditionPausado() {
+        return conditionPausado;
+    }
+
+    public Lock getLockPausado() {
+        return lockPausado;
     }
 }

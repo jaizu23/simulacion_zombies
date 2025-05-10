@@ -12,6 +12,7 @@ module simulacion.simulacion_zombies {
     requires com.almasb.fxgl.all;
     requires org.apache.logging.log4j;
     requires annotations;
+    requires java.desktop;
 
     opens servidor.simulacion_zombies to javafx.fxml;
     exports servidor.simulacion_zombies;
