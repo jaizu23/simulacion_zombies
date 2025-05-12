@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.entorno.Mapa;
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.seres.Humano;
 import servidor.seres.Zombie;
 
@@ -88,15 +88,18 @@ public class mainViewController implements Initializable {
 
     private final Mapa mapa;
 
-    public mainViewController(Mapa mapa) {
+    private servidorRMI servidor;
+
+    public mainViewController(Mapa mapa, servidorRMI servidor) {
         this.mapa = mapa;
+        this.servidor = servidor;
     }
 
     private void initializeLabelsData () {
         // Labels zona segura
-        LabelUpdateConcurrentHashMap<Humano> humanosDescanso = mapa.getDescanso().getHumanosDescanso();
-        LabelUpdateConcurrentHashMap<Humano> humanosComedor = mapa.getComedor().getHumanosComedor();
-        LabelUpdateConcurrentHashMap<Humano> humanosComun = mapa.getZonaComun().getHumanosComun();
+        DataUpdateConcurrentHashMap<Humano> humanosDescanso = mapa.getDescanso().getHumanosDescanso();
+        DataUpdateConcurrentHashMap<Humano> humanosComedor = mapa.getComedor().getHumanosComedor();
+        DataUpdateConcurrentHashMap<Humano> humanosComun = mapa.getZonaComun().getHumanosComun();
         IntegerProperty contadorComida = mapa.getComedor().getContadorComida();
 
         humanosDescanso.setLabel(descanso);
@@ -111,13 +114,13 @@ public class mainViewController implements Initializable {
         ArrayList<Label> labelsT = new ArrayList<>(List.of(tunel1, tunel2, tunel3, tunel4));
 
         for (int i = 0; i < 4; i++) {
-            LabelUpdateConcurrentHashMap<Humano> humanosST = mapa.getTuneles()[i].getHumanosSeguros();
+            DataUpdateConcurrentHashMap<Humano> humanosST = mapa.getTuneles()[i].getHumanosSeguros();
             humanosST.setLabel(labelsS.get(i));
 
-            LabelUpdateConcurrentHashMap<Humano> humanosET = mapa.getTuneles()[i].getHumanosEsperando();
+            DataUpdateConcurrentHashMap<Humano> humanosET = mapa.getTuneles()[i].getHumanosEsperando();
             humanosET.setLabel(labelsE.get(i));
 
-            LabelUpdateConcurrentHashMap<Humano> humanosRT = mapa.getTuneles()[i].getHumanosRiesgo();
+            DataUpdateConcurrentHashMap<Humano> humanosRT = mapa.getTuneles()[i].getHumanosRiesgo();
             humanosRT.setLabel(labelsR.get(i));
 
             StringProperty humanoT = mapa.getTuneles()[i].getIdHumanoTunel();
@@ -129,10 +132,10 @@ public class mainViewController implements Initializable {
         ArrayList<Label> zombiesLabels = new ArrayList<>(List.of(zombies1, zombies2, zombies3, zombies4));
 
         for (int i = 0; i < 4; i++) {
-            LabelUpdateConcurrentHashMap<Humano> humanosR = mapa.getZonasRiesgo()[i].getHumanos();
+            DataUpdateConcurrentHashMap<Humano> humanosR = mapa.getZonasRiesgo()[i].getHumanos();
             humanosR.setLabel(humanosLabels.get(i));
 
-            LabelUpdateConcurrentHashMap<Zombie> zombiesR = mapa.getZonasRiesgo()[i].getZombies();
+            DataUpdateConcurrentHashMap<Zombie> zombiesR = mapa.getZonasRiesgo()[i].getZombies();
             zombiesR.setLabel(zombiesLabels.get(i));
         }
     }

@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import servidor.seres.*;
 import servidor.entorno.zonas.seguras.*;
 import servidor.entorno.zonas.*;
+import servidor.simulacion_zombies.servidorRMI;
+import utilidadesRMI.Estadisticas;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -17,9 +19,13 @@ public class Mapa extends Thread{
 
     private final Random r = new Random();
 
-    private final Comedor comedor = new Comedor();
-    private final ZonaComun zonaComun = new ZonaComun();
-    private final Descanso descanso = new Descanso();
+    private final servidorRMI servidor;
+
+    private final Estadisticas estadisticas;
+
+    private final Comedor comedor = new Comedor(this);
+    private final ZonaComun zonaComun = new ZonaComun(this);
+    private final Descanso descanso = new Descanso(this);
 
     private final ZonaRiesgo[] zonasRiesgo = new ZonaRiesgo[4];
     private final Tunel[] tuneles = new Tunel[4];
@@ -28,9 +34,12 @@ public class Mapa extends Thread{
     private final Condition conditionPausado = lockPausado.newCondition();
     private final AtomicBoolean pausado = new AtomicBoolean(false);
 
-    public Mapa () {
+    public Mapa (servidorRMI servidor) {
+        this.servidor = servidor;
+        this.estadisticas = new Estadisticas();
+
         for (int i = 0; i < 4; i++) {
-            zonasRiesgo[i] = new ZonaRiesgo(i);
+            zonasRiesgo[i] = new ZonaRiesgo(this, i);
             tuneles[i] = new Tunel(i, this);
         }
     }
@@ -98,5 +107,13 @@ public class Mapa extends Thread{
 
     public Lock getLockPausado() {
         return lockPausado;
+    }
+
+    public servidorRMI getServidor() {
+        return servidor;
+    }
+
+    public Estadisticas getEstadisticas() {
+        return estadisticas;
     }
 }

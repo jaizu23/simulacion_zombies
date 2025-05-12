@@ -8,18 +8,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import servidor.entorno.Mapa;
+import utilidadesRMI.ServicioRMI;
 
 import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
 
 public class mainApplication extends Application {
     private static final Logger logger = LogManager.getLogger(mainApplication.class);
 
     @Override
     public void start(Stage mainStage) throws IOException {
-        Mapa mapa = new Mapa();
+        servidorRMI servidor = new servidorRMI();
+        Mapa mapa = new Mapa(servidor);
+
+
+        servidor.inicializarServidor();
 
         FXMLLoader mainLoader = new FXMLLoader(mainApplication.class.getResource("main-view.fxml"));
-        mainLoader.setController(new mainViewController(mapa));
+        mainLoader.setController(new mainViewController(mapa, servidor));
         Scene mainScene = new Scene(mainLoader.load(), 1024, 576);
         mainStage.setTitle("Apocalipsis");
         mainStage.setResizable(false);

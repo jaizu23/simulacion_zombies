@@ -2,7 +2,8 @@ package servidor.entorno.zonas;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.entorno.Mapa;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.exceptions.killedHumanException;
 import servidor.seres.Humano;
 import servidor.seres.Zombie;
@@ -17,13 +18,15 @@ public class ZonaRiesgo {
 
     private final int zona;
 
-    private final LabelUpdateConcurrentHashMap<Humano> humanos = new LabelUpdateConcurrentHashMap<>(10000);
-    private final LabelUpdateConcurrentHashMap<Zombie> zombies = new LabelUpdateConcurrentHashMap<>(10000);
+    private final DataUpdateConcurrentHashMap<Humano> humanos;
+    private final DataUpdateConcurrentHashMap<Zombie> zombies;
 
     private final ConcurrentHashMap<String, Humano> posiblesVictimas = new ConcurrentHashMap<>(10000);
 
-    public ZonaRiesgo(int zona){
+    public ZonaRiesgo(Mapa mapa, int zona){
         this.zona = zona;
+        humanos = new DataUpdateConcurrentHashMap<>(mapa, 10000);
+        zombies = new DataUpdateConcurrentHashMap<>(mapa, 10000);
     }
 
     public void recolectarComida (Humano humano) throws killedHumanException{
@@ -92,11 +95,11 @@ public class ZonaRiesgo {
         return victima;
     }
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanos() {
+    public DataUpdateConcurrentHashMap<Humano> getHumanos() {
         return humanos;
     }
 
-    public LabelUpdateConcurrentHashMap<Zombie> getZombies() {
+    public DataUpdateConcurrentHashMap<Zombie> getZombies() {
         return zombies;
     }
 

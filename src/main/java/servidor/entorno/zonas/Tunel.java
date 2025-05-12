@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.entorno.Mapa;
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.exceptions.killedHumanException;
 import servidor.seres.Humano;
 
@@ -21,9 +21,9 @@ public class Tunel {
 
     private final StringProperty idHumanoTunel = new SimpleStringProperty();
 
-    private final LabelUpdateConcurrentHashMap<Humano> humanosSeguros = new LabelUpdateConcurrentHashMap<>(10000);
-    private final LabelUpdateConcurrentHashMap<Humano> humanosEsperando = new LabelUpdateConcurrentHashMap<>(3);
-    private final LabelUpdateConcurrentHashMap<Humano> humanosRiesgo = new LabelUpdateConcurrentHashMap<>(10000);
+    private final DataUpdateConcurrentHashMap<Humano> humanosSeguros;
+    private final DataUpdateConcurrentHashMap<Humano> humanosEsperando;
+    private final DataUpdateConcurrentHashMap<Humano> humanosRiesgo;
 
     private final Lock lockTunel = new ReentrantLock();
     private final Lock lockCondition = new ReentrantLock();
@@ -37,6 +37,9 @@ public class Tunel {
     public Tunel (int zona, Mapa mapa) {
         this.zona = zona;
         this.mapa = mapa;
+        humanosSeguros = new DataUpdateConcurrentHashMap<>(mapa, 10000);
+        humanosEsperando = new DataUpdateConcurrentHashMap<>(mapa, 3);
+        humanosRiesgo = new DataUpdateConcurrentHashMap<>(mapa, 10000);
     }
 
     public void esperarSeguro (Humano humano){
@@ -129,15 +132,15 @@ public class Tunel {
         return idHumanoTunel;
     }
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanosSeguros() {
+    public DataUpdateConcurrentHashMap<Humano> getHumanosSeguros() {
         return humanosSeguros;
     }
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanosEsperando() {
+    public DataUpdateConcurrentHashMap<Humano> getHumanosEsperando() {
         return humanosEsperando;
     }
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanosRiesgo() {
+    public DataUpdateConcurrentHashMap<Humano> getHumanosRiesgo() {
         return humanosRiesgo;
     }
 }

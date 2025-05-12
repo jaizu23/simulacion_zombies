@@ -3,18 +3,24 @@ package servidor.estructuras_de_datos;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
+import servidor.entorno.Mapa;
 import servidor.exceptions.uninitializedLabelUpdateConcurrentHashMap;
+import servidor.simulacion_zombies.servidorRMI;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V> {
-
+public class DataUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V> {
     private Label label = null;
 
-    public LabelUpdateConcurrentHashMap() {}
+    private Mapa mapa;
 
-    public LabelUpdateConcurrentHashMap(int n) {
+    public DataUpdateConcurrentHashMap(Mapa mapa) {
+        this.mapa = mapa;
+    }
+
+    public DataUpdateConcurrentHashMap(Mapa mapa, int n) {
         super(n);
+        this.mapa = mapa;
     }
 
     @Override
@@ -24,6 +30,7 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         } else {
             V result = super.put(key, value); // Ya es Thread-safe
             updateLabel();
+            updateEstadisticas();
             return result;
         }
     }
@@ -34,6 +41,7 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         } else {
             V result = super.remove(key); // Ya es Thread-safe
             updateLabel();
+            updateEstadisticas();
             return result;
         }
     }
@@ -44,11 +52,15 @@ public class LabelUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V
         });
     }
 
+    private void updateEstadisticas() {
+        mapa.getServidor().actualizarEstadisticas();
+    }
+
     public Label getLabel() {
         return label;
     }
 
-    public synchronized void setLabel(@NotNull Label label) {
+    public void setLabel(@NotNull Label label) {
         this.label = label;
     }
 }

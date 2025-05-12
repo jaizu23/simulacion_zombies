@@ -1,10 +1,11 @@
-package servidor.entorno;
+package utilidadesRMI;
 
 import org.jetbrains.annotations.NotNull;
+import servidor.entorno.Mapa;
+import servidor.entorno.zonas.Tunel;
 import servidor.seres.Zombie;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Estadisticas {
@@ -34,6 +35,23 @@ public class Estadisticas {
         }
         for (int i = 0; i < 3; i++) {
             topZombies[i] = estadisticas.getTopZombies()[i];
+        }
+    }
+
+    public synchronized void actualizar (Mapa mapa) {
+        int HR = mapa.getComedor().getHumanosComedor().size() + mapa.getDescanso().getHumanosDescanso().size() + mapa.getZonaComun().getHumanosComun().size();
+        humanosRefugio.set(HR);
+
+        for (int i = 0; i < 4; i++) {
+            Tunel esteTunel = mapa.getTuneles()[i];
+            int humanoPasando = esteTunel.getIdHumanoTunel().get().isEmpty() ? 0 : 1;
+            int humanosEsteTunel = humanoPasando + esteTunel.getHumanosEsperando().size() +
+                    esteTunel.getHumanosSeguros().size() + esteTunel.getHumanosRiesgo().size();
+
+            humanosTuneles[i].set(humanosEsteTunel);
+
+            humanosRiesgo[i].set(mapa.getZonasRiesgo()[i].getHumanos().size());
+            zombiesRiesgo[i].set(mapa.getZonasRiesgo()[i].getZombies().size());
         }
     }
 

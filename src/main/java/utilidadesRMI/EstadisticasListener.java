@@ -1,6 +1,4 @@
-package interfacesRMI;
-
-import servidor.entorno.Estadisticas;
+package utilidadesRMI;
 
 import java.rmi.Remote;
 

@@ -19,4 +19,5 @@ module simulacion.simulacion_zombies {
     exports servidor.simulacion_zombies;
     exports cliente;
     opens cliente to javafx.fxml;
+    exports utilidadesRMI to java.rmi;
 }

@@ -1,24 +1,59 @@
 package servidor.simulacion_zombies;
 
-import interfacesRMI.EstadisticasListener;
-import interfacesRMI.ServicioRMI;
-import servidor.entorno.Estadisticas;
+import cliente.clienteRMI;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import servidor.entorno.Mapa;
+import utilidadesRMI.EstadisticasListener;
+import utilidadesRMI.ServicioRMI;
+import utilidadesRMI.Estadisticas;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
-    Estadisticas estadisticas;
-    public servidorRMI() throws RemoteException {
+    private static final Logger logger = LogManager.getLogger(servidorRMI.class);
 
+    private Mapa mapa;
+
+    private EstadisticasListener listener;
+
+    public servidorRMI() throws RemoteException {
+        super();
     }
+
+    public void inicializarServidor () {
+        try {
+            LocateRegistry.createRegistry(1099);
+            Naming.rebind("ServicioRMI", this);
+        } catch (Exception e) {
+            logger.error("Ha ocurrido un error al inicializar el servidor del servicio RMI");
+        }
+    }
+
+    @Override
+    public void registrarListener(EstadisticasListener listener) throws RemoteException {
+        this.listener = listener;
+    }
+
     @Override
     public void pausarReanudar() throws RemoteException {
-
+        if (mapa.isPausado()) {
+            mapa.setPausado(false);
+        } else {
+            mapa.setPausado(true);
+            mapa.getConditionPausado().signalAll();
+        }
     }
 
-    private void notificarListener () {
-        Estadisticas estadisticas = new Estadisticas(this.estadisticas); // Copiamos por seguridad
-        
+    public void actualizarEstadisticas () {
+        mapa.getEstadisticas().actualizar(mapa);
+        listener.actualizarEstadisticas(mapa.getEstadisticas());
+    }
+
+    public void setMapa(Mapa mapa) {
+        this.mapa = mapa;
     }
 }

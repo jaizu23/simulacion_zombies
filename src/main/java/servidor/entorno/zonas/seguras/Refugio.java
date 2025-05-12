@@ -2,7 +2,7 @@ package servidor.entorno.zonas.seguras;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.seres.Humano;
 
 import java.util.Random;
@@ -23,12 +23,12 @@ public abstract class Refugio {
         }
     }
 
-    protected void entrarZona (LabelUpdateConcurrentHashMap<Humano> listaZona, Humano humano) {
+    protected void entrarZona (DataUpdateConcurrentHashMap<Humano> listaZona, Humano humano) {
         String id = humano.getIdHumano();
         listaZona.put(id, humano);
     }
 
-    protected void salirZona (LabelUpdateConcurrentHashMap<Humano> listaZona, String id) {
+    protected void salirZona (DataUpdateConcurrentHashMap<Humano> listaZona, String id) {
         listaZona.remove(id);
     }
 }

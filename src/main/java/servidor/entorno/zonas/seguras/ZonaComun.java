@@ -1,10 +1,15 @@
 package servidor.entorno.zonas.seguras;
 
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.entorno.Mapa;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.seres.Humano;
 
 public class ZonaComun extends Refugio{
-    private final LabelUpdateConcurrentHashMap<Humano> humanosComun = new LabelUpdateConcurrentHashMap<>(10000);
+    private final DataUpdateConcurrentHashMap<Humano> humanosComun;
+
+    public ZonaComun (Mapa mapa) {
+        humanosComun = new DataUpdateConcurrentHashMap<>(mapa, 10000);
+    }
 
     public void prepararse(Humano humano) {
         String id = humano.getIdHumano();
@@ -14,7 +19,7 @@ public class ZonaComun extends Refugio{
         salirZona(humanosComun, id);
     }
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanosComun() {
+    public DataUpdateConcurrentHashMap<Humano> getHumanosComun() {
         return humanosComun;
     }
 }

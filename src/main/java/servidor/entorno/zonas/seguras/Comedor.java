@@ -5,7 +5,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import servidor.estructuras_de_datos.LabelUpdateConcurrentHashMap;
+import servidor.entorno.Mapa;
+import servidor.estructuras_de_datos.DataUpdateConcurrentHashMap;
 import servidor.seres.Humano;
 
 import java.util.concurrent.Semaphore;
@@ -13,17 +14,13 @@ import java.util.concurrent.Semaphore;
 public class Comedor extends Refugio{
     private static final Logger logger = LogManager.getLogger(Comedor.class);
 
-    private final LabelUpdateConcurrentHashMap<Humano> humanosComedor = new LabelUpdateConcurrentHashMap<>(10000);
+    private final DataUpdateConcurrentHashMap<Humano> humanosComedor;
 
     private final IntegerProperty contadorComida = new SimpleIntegerProperty(0);
     private final Semaphore semaforoComida = new Semaphore(0);
 
-    public LabelUpdateConcurrentHashMap<Humano> getHumanosComedor() {
-        return humanosComedor;
-    }
-
-    public IntegerProperty getContadorComida() {
-        return contadorComida;
+    public Comedor (Mapa mapa) {
+         humanosComedor= new DataUpdateConcurrentHashMap<>(mapa, 10000);
     }
 
     public void comer (Humano humano) {
@@ -49,5 +46,13 @@ public class Comedor extends Refugio{
         }
         semaforoComida.release(cantidadComida);
         humano.añadirComida(-cantidadComida);
+    }
+
+    public DataUpdateConcurrentHashMap<Humano> getHumanosComedor() {
+        return humanosComedor;
+    }
+
+    public IntegerProperty getContadorComida() {
+        return contadorComida;
     }
 }
