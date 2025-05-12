@@ -1,5 +1,6 @@
 package servidor.simulacion_zombies;
 
+import cliente.clienteViewController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javafx.application.Application;
@@ -24,15 +25,6 @@ public class mainApplication extends Application {
         mainStage.setResizable(false);
         mainStage.setScene(mainScene);
         mainStage.show();
-
-        Stage clienteStage = new Stage();
-        FXMLLoader clienteLoader = new FXMLLoader(mainApplication.class.getResource("cliente-view.fxml"));
-        clienteLoader.setController(new clienteViewController(mapa));
-        Scene clienteScene = new Scene(clienteLoader.load(), 1024, 576);
-        clienteStage.setTitle("Apocalipsis - Cliente");
-        clienteStage.setResizable(false);
-        clienteStage.setScene(clienteScene);
-        clienteStage.show();
 
         mapa.start();
     }

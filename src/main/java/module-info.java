@@ -13,7 +13,10 @@ module simulacion.simulacion_zombies {
     requires org.apache.logging.log4j;
     requires annotations;
     requires java.desktop;
+    requires java.rmi;
 
     opens servidor.simulacion_zombies to javafx.fxml;
     exports servidor.simulacion_zombies;
+    exports cliente;
+    opens cliente to javafx.fxml;
 }

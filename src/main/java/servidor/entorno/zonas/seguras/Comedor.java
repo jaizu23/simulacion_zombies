@@ -38,6 +38,7 @@ public class Comedor extends Refugio{
             Platform.runLater(() -> contadorComida.set(contadorComida.get() - 1));
         }
         pasarTiempo(humano, 3000, 5000);
+        humano.comprobarPausado();
         salirZona(humanosComedor, id);
     }
 

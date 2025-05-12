@@ -31,32 +31,23 @@ public class Humano extends Thread {
         while (!mapa.isPausado()) {
             try {
                 try {
-                    comprobarPausado();
                     mapa.getZonaComun().prepararse(this);
 
                     int zona = r.nextInt(0, 4);
 
-                    comprobarPausado();
                     mapa.getTuneles()[zona].esperarSeguro(this);
 
-                    comprobarPausado();
                     mapa.getZonasRiesgo()[zona].entrarHumano(this);
-                    comprobarPausado();
                     mapa.getZonasRiesgo()[zona].recolectarComida(this);
                     comprobarPausado();
                     mapa.getZonasRiesgo()[zona].salir(id, true);
 
-                    comprobarPausado();
                     mapa.getTuneles()[zona].esperarRiesgo(this);
 
-                    comprobarPausado();
                     mapa.getComedor().depositarComida(this);
-                    comprobarPausado();
                     mapa.getDescanso().descansar(this, 2000, 4000);
-                    comprobarPausado();
                     mapa.getComedor().comer(this);
 
-                    comprobarPausado();
                     if (marcado.get()) {
                         mapa.getDescanso().descansar(this, 2000, 4000);
                         marcado.set(false);
@@ -72,7 +63,7 @@ public class Humano extends Thread {
         }
     }
 
-    private void comprobarPausado() {
+    public void comprobarPausado() {
         while(mapa.isPausado()) {
             mapa.getLockPausado().lock();
             try {

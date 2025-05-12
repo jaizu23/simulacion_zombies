@@ -1,4 +1,4 @@
-package servidor.simulacion_zombies;
+package cliente;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,23 +47,7 @@ public class clienteViewController implements Initializable {
 
     @FXML
     private void onPausarBoton() {
-        if (mapa.isPausado()) {
-            mapa.setPausado(false);
-            mapa.getLockPausado().lock();
-            try {
-                mapa.getConditionPausado().signalAll();
-            } finally {
-                mapa.getLockPausado().unlock();
-            }
-        } else {
-            mapa.setPausado(true);
-        }
-    }
 
-    private Mapa mapa;
-
-    public clienteViewController(Mapa mapa) {
-        this.mapa = mapa;
     }
 
     private void initalizeElements() {

@@ -51,6 +51,7 @@ public class ZonaRiesgo {
                 logger.error("Se ha producido un error cuando {} recogia comida", id);
             }
         }
+        humano.comprobarPausado();
     }
 
     public void entrarHumano (Humano humano) {
@@ -59,6 +60,7 @@ public class ZonaRiesgo {
         posiblesVictimas.put(id, humano);
         humanos.put(id, humano);
 
+        humano.comprobarPausado();
         logger.info("{} ha entrado en la zona de riesgo {}", id, this.zona);
     }
 
@@ -66,6 +68,8 @@ public class ZonaRiesgo {
         String id = zombie.getIdZombie();
 
         zombies.put(id, zombie);
+
+        zombie.comprobarPausado();
         logger.info("{} ha entrado en la zona de riesgo {}", id, this.zona);
     }
 

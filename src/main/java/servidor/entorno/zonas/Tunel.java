@@ -45,12 +45,17 @@ public class Tunel {
             humanosSeguros.put(idHumano, humano);
             logger.info("{} está esperando a encontrar grupo para pasar por el túnel {} para entrar a la zona de riesgo", idHumano, zona);
 
+            humano.comprobarPausado();
+
             grupoTunel.acquire(); // No deja pasar a 3 hilos a la barrera (de forma que la barrera bajaría) hasta que todos los hilos del grupo anterior han pasado
             grupoCompletado.await();
             logger.info("{} ha encontrado grupo para pasar por el túnel {} a la zona de riesgo", idHumano, zona);
 
             humanosSeguros.remove(idHumano);
             humanosEsperando.put(idHumano, humano);
+
+            humano.comprobarPausado();
+
             lockCondition.lock();
             try {
                 boolean haPasado = false;
@@ -83,6 +88,8 @@ public class Tunel {
 
         humanosRiesgo.put(idHumano, humano);
 
+        humano.comprobarPausado();
+
         try {
             pasarTunel(humano, false);
             lockCondition.lock();
@@ -107,6 +114,7 @@ public class Tunel {
             Thread.sleep(1000);
             Platform.runLater(() -> idHumanoTunel.set(""));
 
+            humano.comprobarPausado();
             logger.info("{} ha salido del tunel {}", idHumano, zona);
         } catch (InterruptedException e) {
             logger.error("{} ha sido interrumpido mientras pasaba por el tunel {}", idHumano, zona);

@@ -5,41 +5,29 @@ import org.apache.logging.log4j.Logger;
 import servidor.entorno.Mapa;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Zombie extends Thread {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
 
     Random r = new Random();
 
-    public String getIdZombie() {
-        return idZombie;
-    }
-
-    private final String idZombie;
-    private final Mapa mapa;
+    private String idZombie;
+    private Mapa mapa;
     private int zona = -1;
-    private int contadorMuertes;
+    private AtomicInteger contadorMuertes = new AtomicInteger(0);
 
-    public int getContadorMuertes() {
-        return contadorMuertes;
-    }
-
-    public void sumarContadorMuertes() {
-        contadorMuertes += 1;
-    }
-
+    public Zombie () {}
 
     public Zombie(String id, Mapa mapa) {
         this.idZombie = id;
         this.mapa = mapa;
-        this.contadorMuertes = 0;
     }
 
     public Zombie(String id, Mapa mapa, int zona) {
         this.idZombie = id;
         this.mapa = mapa;
         this.zona = zona;
-        this.contadorMuertes = 0;
     }
 
     public void run() {
@@ -48,15 +36,13 @@ public class Zombie extends Thread {
         }
         try {
             while (!mapa.isPausado()) {
-                comprobarPausado();
                 mapa.getZonasRiesgo()[zona].entrarZombie(this);
-                comprobarPausado();
                 if (hayHumanosDisponibles()) {
                     atacar();
                 }
                 int espera = r.nextInt(2000, 3001);
-                comprobarPausado();
                 Thread.sleep(espera);
+                comprobarPausado();
                 int nuevaPosicion = r.nextInt(3);
                 if (nuevaPosicion >= zona) {
                     nuevaPosicion++;
@@ -103,6 +89,7 @@ public class Zombie extends Thread {
     }
 
     public void atacar() {
+        comprobarPausado();
         int duracionAtaque = r.nextInt(500, 1501);
         Humano victima = mapa.getZonasRiesgo()[zona].elegirVictima();
         logger.info("{} está siendo atacado por el zombie {} (número de muertes: {})", victima.getIdHumano(), idZombie, contadorMuertes);
@@ -126,7 +113,7 @@ public class Zombie extends Thread {
         }
     }
 
-    private void comprobarPausado () {
+    public void comprobarPausado () {
         while(mapa.isPausado()) {
             mapa.getLockPausado().lock();
             try {
@@ -137,5 +124,17 @@ public class Zombie extends Thread {
                 mapa.getLockPausado().unlock();
             }
         }
+    }
+
+    public String getIdZombie() {
+        return idZombie;
+    }
+
+    public int getContadorMuertes() {
+        return contadorMuertes.get();
+    }
+
+    public void sumarContadorMuertes() {
+        contadorMuertes.set(contadorMuertes.get() + 1);
     }
 }

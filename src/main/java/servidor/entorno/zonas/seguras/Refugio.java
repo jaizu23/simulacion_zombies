@@ -17,6 +17,7 @@ public abstract class Refugio {
         try {
             logger.info("{} está pasando tiempo en la zona {}", id, this.getClass().getSimpleName());
             Thread.sleep(r.nextInt(inf, sup));
+            humano.comprobarPausado();
         } catch (InterruptedException e) {
             logger.error("Error mientras el {} pasaba tiempo en la zona {}: {}", id, this.getClass().getSimpleName(), e);
         }

@@ -10,6 +10,7 @@ public class ZonaComun extends Refugio{
         String id = humano.getIdHumano();
         entrarZona(humanosComun, humano);
         pasarTiempo(humano, 1000, 2000);
+        humano.comprobarPausado();
         salirZona(humanosComun, id);
     }
 
