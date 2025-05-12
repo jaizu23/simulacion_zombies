@@ -5,6 +5,7 @@ class Humano {
 + void serAtacado()
 + int compareTo(Humano otro)
 + void añadirComida(int)
++comprobaPausado()
 }
 
 class Zombie {
@@ -15,6 +16,7 @@ class Zombie {
 + void atacar()
 + int getContadorMuertes()
 + void sumarContadorMuertes()
++comprobarPausado()
 }
 
 class Mapa {
