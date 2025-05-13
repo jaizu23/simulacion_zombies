@@ -11,6 +11,7 @@ import utilidadesRMI.Estadisticas;
 import utilidadesRMI.EstadisticasListener;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -71,7 +72,7 @@ public class clienteViewController implements Initializable, EstadisticasListene
         zombiesRiesgo = new ArrayList<>(List.of(ZR1, ZR2, ZR3, ZR4));
     }
     @Override
-    public void actualizarEstadisticas(Estadisticas estadisticas) {
+    public void actualizarEstadisticas(Estadisticas estadisticas) throws RemoteException {
         Platform.runLater(() -> {
             refugio.setText(String.valueOf(estadisticas.getHumanosRefugio().get()));
             for (int i=0; i<4; i++) {

@@ -13,7 +13,7 @@ public class mainCliente extends Application {
         clienteRMI cliente = new clienteRMI();
 
         Stage clienteStage = new Stage();
-        FXMLLoader clienteLoader = new FXMLLoader(mainApplication.class.getResource("cliente-view.fxml"));
+        FXMLLoader clienteLoader = new FXMLLoader(mainApplication.class.getResource("/cliente/cliente-view.fxml"));
         clienteViewController controlador = new clienteViewController(cliente);
 
         cliente.inicializarCliente(controlador);

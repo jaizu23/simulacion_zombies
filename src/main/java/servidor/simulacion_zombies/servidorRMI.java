@@ -42,15 +42,26 @@ public class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
     public void pausarReanudar() throws RemoteException {
         if (mapa.isPausado()) {
             mapa.setPausado(false);
+            mapa.getLockPausado().lock();
+            try {
+                mapa.getConditionPausado().signalAll();
+            } finally {
+                mapa.getLockPausado().unlock();
+            }
         } else {
             mapa.setPausado(true);
-            mapa.getConditionPausado().signalAll();
         }
     }
 
     public void actualizarEstadisticas () {
-        mapa.getEstadisticas().actualizar(mapa);
-        listener.actualizarEstadisticas(mapa.getEstadisticas());
+        if (listener != null) {
+            mapa.getEstadisticas().actualizar(mapa);
+            try {
+                listener.actualizarEstadisticas(mapa.getEstadisticas());
+            } catch (RemoteException e) {
+                logger.error("El servidor fue interrumpido mientras intentaba actualizar las estadisticas en el cliente");
+            }
+        }
     }
 
     public void setMapa(Mapa mapa) {

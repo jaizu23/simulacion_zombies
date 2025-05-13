@@ -21,7 +21,7 @@ public class mainApplication extends Application {
     public void start(Stage mainStage) throws IOException {
         servidorRMI servidor = new servidorRMI();
         Mapa mapa = new Mapa(servidor);
-
+        servidor.setMapa(mapa);
 
         servidor.inicializarServidor();
 

@@ -5,10 +5,11 @@ import servidor.entorno.Mapa;
 import servidor.entorno.zonas.Tunel;
 import servidor.seres.Zombie;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Estadisticas {
+public class Estadisticas implements Serializable {
     private AtomicInteger humanosRefugio = new AtomicInteger(0);
     private AtomicInteger[] humanosTuneles = new AtomicInteger[4];
     private AtomicInteger[] humanosRiesgo = new AtomicInteger[4];
@@ -44,7 +45,7 @@ public class Estadisticas {
 
         for (int i = 0; i < 4; i++) {
             Tunel esteTunel = mapa.getTuneles()[i];
-            int humanoPasando = esteTunel.getIdHumanoTunel().get().isEmpty() ? 0 : 1;
+            int humanoPasando = esteTunel.getIdHumanoTunel().get() == null ? 0 : 1;
             int humanosEsteTunel = humanoPasando + esteTunel.getHumanosEsperando().size() +
                     esteTunel.getHumanosSeguros().size() + esteTunel.getHumanosRiesgo().size();
 
@@ -61,7 +62,8 @@ public class Estadisticas {
         }
         ArrayList<Zombie> zombiesCandidatos = new ArrayList<>(4);
         for (int i = 0; i < 3; i++) {
-            zombiesCandidatos.set(i, topZombies[i]);
+            Zombie z = topZombies[i];
+            zombiesCandidatos.set(i, z);
         }
         zombiesCandidatos.set(4, zombie);
 
