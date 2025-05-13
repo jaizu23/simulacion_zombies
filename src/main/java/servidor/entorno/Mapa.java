@@ -73,6 +73,23 @@ public class Mapa extends Thread{
         }
     }
 
+    public synchronized void actualizarEstadisticas () {
+        int HR = comedor.getHumanosComedor().size() + descanso.getHumanosDescanso().size() + zonaComun.getHumanosComun().size();
+        estadisticas.getHumanosRefugio().set(HR);
+
+        for (int i = 0; i < 4; i++) {
+            Tunel esteTunel = tuneles[i];
+            int humanoPasando = esteTunel.getIdHumanoTunel().get() == null ? 0 : 1;
+            int humanosEsteTunel = humanoPasando + esteTunel.getHumanosEsperando().size() +
+                    esteTunel.getHumanosSeguros().size() + esteTunel.getHumanosRiesgo().size();
+
+            estadisticas.getHumanosTuneles()[i].set(humanosEsteTunel);
+
+            estadisticas.getHumanosRiesgo()[i].set(zonasRiesgo[i].getHumanos().size());
+            estadisticas.getZombiesRiesgo()[i].set(zonasRiesgo[i].getZombies().size());
+        }
+    }
+
     public Comedor getComedor() {
         return comedor;
     }

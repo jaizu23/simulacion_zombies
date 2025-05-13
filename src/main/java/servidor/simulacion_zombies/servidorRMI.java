@@ -55,7 +55,7 @@ public class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
 
     public void actualizarEstadisticas () {
         if (listener != null) {
-            mapa.getEstadisticas().actualizar(mapa);
+            mapa.actualizarEstadisticas();
             try {
                 listener.actualizarEstadisticas(mapa.getEstadisticas());
             } catch (RemoteException e) {

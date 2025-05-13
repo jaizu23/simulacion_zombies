@@ -1,12 +1,11 @@
 package utilidadesRMI;
 
 import org.jetbrains.annotations.NotNull;
-import servidor.entorno.Mapa;
-import servidor.entorno.zonas.Tunel;
 import servidor.seres.Zombie;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Estadisticas implements Serializable {
@@ -14,16 +13,21 @@ public class Estadisticas implements Serializable {
     private AtomicInteger[] humanosTuneles = new AtomicInteger[4];
     private AtomicInteger[] humanosRiesgo = new AtomicInteger[4];
     private AtomicInteger[] zombiesRiesgo = new AtomicInteger[4];
-    private Zombie[] topZombies = new Zombie[3];
+
+    private CopyOnWriteArrayList<String> stringsTopZombies= new CopyOnWriteArrayList<>();
+    private transient ArrayList<Zombie> topZombies = new ArrayList<>();
+    private transient ArrayList<Zombie> zombiesCandidatos = new ArrayList<>();
 
     public Estadisticas () {
         for (int i = 0; i < 4; i++) {
             humanosTuneles[i] = new AtomicInteger(0);
             humanosRiesgo[i] = new AtomicInteger(0);
             zombiesRiesgo[i] = new AtomicInteger(0);
+            zombiesCandidatos.add(new Zombie("Ninguno", -1));
         }
         for (int i = 0; i < 3; i++) {
-            topZombies[i] = new Zombie();
+            topZombies.add(new Zombie("Ninguno", -1));
+            stringsTopZombies.add("");
         }
     }
 
@@ -33,44 +37,40 @@ public class Estadisticas implements Serializable {
             humanosTuneles[i].set(estadisticas.getHumanosTuneles()[i].get());
             humanosRiesgo[i].set(estadisticas.getHumanosRiesgo()[i].get());
             zombiesRiesgo[i].set(estadisticas.getZombiesRiesgo()[i].get());
+            zombiesCandidatos.add(new Zombie("Ninguno", -1));
         }
         for (int i = 0; i < 3; i++) {
-            topZombies[i] = estadisticas.getTopZombies()[i];
-        }
-    }
-
-    public synchronized void actualizar (Mapa mapa) {
-        int HR = mapa.getComedor().getHumanosComedor().size() + mapa.getDescanso().getHumanosDescanso().size() + mapa.getZonaComun().getHumanosComun().size();
-        humanosRefugio.set(HR);
-
-        for (int i = 0; i < 4; i++) {
-            Tunel esteTunel = mapa.getTuneles()[i];
-            int humanoPasando = esteTunel.getIdHumanoTunel().get() == null ? 0 : 1;
-            int humanosEsteTunel = humanoPasando + esteTunel.getHumanosEsperando().size() +
-                    esteTunel.getHumanosSeguros().size() + esteTunel.getHumanosRiesgo().size();
-
-            humanosTuneles[i].set(humanosEsteTunel);
-
-            humanosRiesgo[i].set(mapa.getZonasRiesgo()[i].getHumanos().size());
-            zombiesRiesgo[i].set(mapa.getZonasRiesgo()[i].getZombies().size());
+            topZombies.set(i, estadisticas.getTopZombies().get(i));
+            stringsTopZombies.add("");
         }
     }
 
     public synchronized void checkAddTopZombie (Zombie zombie) {
-        if (zombie.getContadorMuertes() <= topZombies[0].getContadorMuertes()) {
+        if (zombie.getContadorMuertes() <= topZombies.getFirst().getContadorMuertes()) {
             return;
         }
-        ArrayList<Zombie> zombiesCandidatos = new ArrayList<>(4);
-        for (int i = 0; i < 3; i++) {
-            Zombie z = topZombies[i];
-            zombiesCandidatos.set(i, z);
-        }
-        zombiesCandidatos.set(4, zombie);
+        if (!topZombies.contains(zombie)) {
+            for (int i = 0; i < 3; i++) {
+                zombiesCandidatos.set(i, topZombies.get(i));
+            }
+            zombiesCandidatos.set(3, zombie);
 
-        zombiesCandidatos.sort(Comparator.comparingInt(Zombie::getContadorMuertes));
-        for (int i = 0; i < 3; i++) {
-            topZombies[i] = zombiesCandidatos.get(i+1);
+            zombiesCandidatos.sort(Comparator.comparingInt(Zombie::getContadorMuertes));
+
+            for (int i = 0; i < 3; i++) {
+                StringBuilder stringZombie = new StringBuilder();
+                topZombies.set(i, zombiesCandidatos.get(i+1));
+                stringsTopZombies.set(i, stringZombie.append(topZombies.get(i).getIdZombie()).append(" - ").append(topZombies.get(i).getContadorMuertes()).append(" muertes\n").toString());
+            }
+        } else {
+            topZombies.sort(Comparator.comparingInt(Zombie::getContadorMuertes));
+            for (int i = 0; i < 3; i++) {
+                StringBuilder stringZombie = new StringBuilder();
+                stringsTopZombies.set(i, stringZombie.append(topZombies.get(i).getIdZombie()).append(" - ").append(topZombies.get(i).getContadorMuertes()).append(" muertes\n").toString());
+            }
         }
+
+
     }
 
     public AtomicInteger getHumanosRefugio() {
@@ -105,7 +105,11 @@ public class Estadisticas implements Serializable {
         this.zombiesRiesgo = zombiesRiesgo;
     }
 
-    public Zombie[] getTopZombies() {
+    public ArrayList<Zombie> getTopZombies() {
         return topZombies;
+    }
+
+    public CopyOnWriteArrayList<String> getStringsTopZombies() {
+        return stringsTopZombies;
     }
 }

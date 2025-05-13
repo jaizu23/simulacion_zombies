@@ -2,7 +2,9 @@ package cliente;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import servidor.simulacion_zombies.mainApplication;
 import utilidadesRMI.EstadisticasListener;
@@ -23,6 +25,12 @@ public class mainCliente extends Application {
         clienteStage.setTitle("Apocalipsis - Cliente");
         clienteStage.setResizable(false);
         clienteStage.setScene(clienteScene);
+
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double x = screenBounds.getMaxX() - 1024;
+        double y = screenBounds.getMaxY() - 610;
+        clienteStage.setX(x);
+        clienteStage.setY(y);
         clienteStage.show();
     }
 }

@@ -8,27 +8,34 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Zombie extends Thread implements Serializable {
+public class Zombie extends Thread {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
 
-    Random r = new Random();
+    private Random r = new Random();
 
     private String idZombie;
     private Mapa mapa;
     private int zona = -1;
     private AtomicInteger contadorMuertes = new AtomicInteger(0);
 
-    public Zombie () {}
+    public Zombie (String id, int contadorMuertes) {
+        this.idZombie = id;
+        this.contadorMuertes.set(contadorMuertes);
+    }
 
     public Zombie(String id, Mapa mapa) {
         this.idZombie = id;
         this.mapa = mapa;
+        mapa.getEstadisticas().checkAddTopZombie(this);
+        mapa.getServidor().actualizarEstadisticas();
     }
 
     public Zombie(String id, Mapa mapa, int zona) {
         this.idZombie = id;
         this.mapa = mapa;
         this.zona = zona;
+        mapa.getEstadisticas().checkAddTopZombie(this);
+        mapa.getServidor().actualizarEstadisticas();
     }
 
     public void run() {
@@ -127,16 +134,17 @@ public class Zombie extends Thread implements Serializable {
         }
     }
 
+    public void sumarContadorMuertes() {
+        contadorMuertes.set(contadorMuertes.get() + 1);
+        mapa.getEstadisticas().checkAddTopZombie(this);
+        mapa.getServidor().actualizarEstadisticas();
+    }
+
     public String getIdZombie() {
         return idZombie;
     }
 
     public int getContadorMuertes() {
         return contadorMuertes.get();
-    }
-
-    public void sumarContadorMuertes() {
-        contadorMuertes.set(contadorMuertes.get() + 1);
-        mapa.getEstadisticas().checkAddTopZombie(this);
     }
 }

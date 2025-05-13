@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class clienteViewController implements Initializable, EstadisticasListener {
     private clienteRMI cliente;
@@ -81,9 +82,10 @@ public class clienteViewController implements Initializable, EstadisticasListene
                 zombiesRiesgo.get(i).setText(String.valueOf(estadisticas.getZombiesRiesgo()[i].get()));
             }
             StringBuilder textTopZombies = new StringBuilder();
-            Zombie[] topZombies = estadisticas.getTopZombies();
-            for (int i=0; i<3; i++) {
-                textTopZombies.append(topZombies[i].getIdZombie()).append(" - ").append(topZombies[i].getContadorMuertes()).append(" muertes\n");
+            CopyOnWriteArrayList<String> topZombies = estadisticas.getStringsTopZombies();
+
+            for (int i=2; i>=0; i--) {
+                textTopZombies.append(topZombies.get(i));
             }
             rankingZombies.setText(textTopZombies.toString());
         });
