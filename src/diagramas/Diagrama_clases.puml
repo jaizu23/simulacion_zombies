@@ -36,57 +36,83 @@ class Tunel {
 + void pasarTunel(Humano humano, boolean ladoSeguro) throws InterruptedException
 }
 
-class Comedor {
-+ void comer(Humano humano)
-+ void depositarComida(Humano humano)
-}
-
-
-class Descanso {
-+ void descansar(Humano humano, int inf, int sup)
-}
-
 abstract class Refugio {
 # void pasarTiempo(Humano humano, int inf, int sup)
 # void entrarZona(LabelUpdateConcurrentHashMap<Humano> listaZona, Humano humano)
 # void salirZona(LabelUpdateConcurrentHashMap<Humano> listaZona, String id)
 }
 
-class ZonaComun {
+class Comedor extends Refugio{
++ void comer(Humano humano)
++ void depositarComida(Humano humano)
+}
+
+
+class Descanso extends Refugio{
++ void descansar(Humano humano, int inf, int sup)
+}
+
+class ZonaComun extends Refugio{
 +prepararse(Humano humano)
 }
 
 class clienteRMI {
-    + inicializarCliente(listener: clienteViewController)
-    + pausarReanudar()
++ inicializarCliente(listener: clienteViewController)
++ pausarReanudar()
 }
 
 class clienteViewController implements Initializable, EstadisticasListener {
-    + actualizarEstadisticas(est: Estadisticas)
-    + initialize(url: URL, rb: ResourceBundle)
++ actualizarEstadisticas(est: Estadisticas)
++ initialize(url: URL, rb: ResourceBundle)
 }
 
 class mainCliente extends Application {
-    + start(stage: Stage)
++ start(stage: Stage)
 }
 
 class mainApplication extends Application {
-    + start(stage: Stage)
-    + main(args: String[])
++ start(stage: Stage)
++ main(args: String[])
 }
 
 class mainViewController implements Initializable {
-    + initialize(url: URL, rb: ResourceBundle)
++ initialize(url: URL, rb: ResourceBundle)
 }
 
 class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
-    + inicializarServidor()
-    + registrarListener(listener: EstadisticasListener)
-    + pausarReanudar()
-    + actualizarEstadisticas()
++ inicializarServidor()
++ registrarListener(listener: EstadisticasListener)
++ pausarReanudar()
++ actualizarEstadisticas()
+}
+
+class Estadisticas implements Serializable{
++ checkAddTopZombie (Zombie zombie)
 }
 
 
+Humano --> Mapa : usa
+
+Mapa --> Comedor : contiene
+Mapa --> ZonaComun : contiene
+Mapa --> Descanso : contiene
+Mapa --> Zombie : crea
+Mapa --> Humano : crea
+
+Zombie --> Mapa : usa
+Zombie -> Humano : ataca / zombifica
+
+ZonaRiesgo --> Humano : usa
+ZonaRiesgo --> Zombie : usa
+
+Tunel --> Humano : utiliza
+Tunel --> Mapa : referencia
+
+Comedor --> Humano : utiliza
+
+Descanso --> Humano : utiliza
+
+Refugio --> Humano : usa
 
 clienteRMI --> ServicioRMI : usa
 clienteRMI --> clienteViewController : recibe listener
@@ -104,19 +130,5 @@ mainViewController --> Mapa : contiene
 servidorRMI --> EstadisticasListener : comunica
 servidorRMI --> Mapa : contiene
 
-Humano --> Mapa : usa
-Mapa --> Comedor : contiene
-Mapa --> ZonaComun : contiene
-Mapa --> Descanso : contiene
-Mapa ---> Zombie : crea
-Mapa --> Humano : crea
-Zombie --> Mapa : usa
-Zombie --> Humano : ataca / zombifica
-ZonaRiesgo --> Humano : usa
-ZonaRiesgo --> Zombie : usa
-Tunel --> Humano : utiliza
-Tunel --> Mapa : referencia
-Comedor --> Humano : utiliza
-Descanso --> Humano : utiliza
-Refugio --> Humano : usa
+Estadisticas --> Zombie : contiene
 @enduml

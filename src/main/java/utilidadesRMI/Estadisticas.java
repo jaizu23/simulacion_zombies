@@ -31,20 +31,6 @@ public class Estadisticas implements Serializable {
         }
     }
 
-    public Estadisticas (@NotNull Estadisticas estadisticas) {
-        humanosRefugio.set(estadisticas.getHumanosRefugio().get());
-        for (int i = 0; i < 4; i++) {
-            humanosTuneles[i].set(estadisticas.getHumanosTuneles()[i].get());
-            humanosRiesgo[i].set(estadisticas.getHumanosRiesgo()[i].get());
-            zombiesRiesgo[i].set(estadisticas.getZombiesRiesgo()[i].get());
-            zombiesCandidatos.add(new Zombie("Ninguno", -1));
-        }
-        for (int i = 0; i < 3; i++) {
-            topZombies.set(i, estadisticas.getTopZombies().get(i));
-            stringsTopZombies.add("");
-        }
-    }
-
     public synchronized void checkAddTopZombie (Zombie zombie) {
         if (zombie.getContadorMuertes() <= topZombies.getFirst().getContadorMuertes()) {
             return;
