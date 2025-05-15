@@ -38,7 +38,7 @@ public class Estadisticas implements Serializable {
     public synchronized void checkAddTopZombie (Zombie zombie) {
         logger.info("Eligiendo el top de zombies");
         if (zombie.getContadorMuertes() <= topZombies.getFirst().getContadorMuertes()) {
-            return;
+            return; 
         }
         if (!topZombies.contains(zombie)) {
             for (int i = 0; i < 3; i++) {
