@@ -1,6 +1,0 @@
-Es mejor hacer un método remoto actualizarEstadisticas que cambie todas las estadisticas cada vez que hay algún cambio
-o un método para cada estadística individualmente para que cuando algo cambie sólo se cambie eso?
-
-Hay que hacer un patrón callback RMI o que el cliente vaya pidiendo las estadísticas cada cierto tiempo?
-
-Si hay que hacer el patrón callback, hay que hacer un main que inicie los dos a la vez para que no de errores de conexión o que simplemente actualice las estadísticas sólo si el cliente está activo?
