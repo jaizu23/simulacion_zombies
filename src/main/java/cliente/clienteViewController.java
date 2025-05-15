@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utilidadesRMI.Estadisticas;
 import utilidadesRMI.EstadisticasListener;
 
@@ -16,7 +18,9 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class clienteViewController implements Initializable, EstadisticasListener {
-    private clienteRMI cliente;
+    private static final Logger logger = LogManager.getLogger(clienteViewController.class);
+
+    private final clienteRMI cliente;
 
     @FXML
     private Label refugio;
@@ -73,6 +77,8 @@ public class clienteViewController implements Initializable, EstadisticasListene
 
     @Override
     public void actualizarEstadisticas(Estadisticas estadisticas) throws RemoteException {
+        logger.info("Actualizando estadísticas en la vista del cliente");
+
         Platform.runLater(() -> {
             refugio.setText(String.valueOf(estadisticas.getHumanosRefugio().get()));
             for (int i=0; i<4; i++) {
@@ -92,6 +98,7 @@ public class clienteViewController implements Initializable, EstadisticasListene
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        logger.info("Inicializando controlador de la vista");
         initalizeElements();
     }
 }

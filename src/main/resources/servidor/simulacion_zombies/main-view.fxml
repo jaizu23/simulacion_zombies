@@ -141,11 +141,6 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <Label fx:id="esperandoTunel2" alignment="CENTER" prefHeight="30.0" prefWidth="106.0" textFill="WHITE">
-         <font>
-            <Font name="Baskerville Old Face" size="13.0" />
-         </font>
-      </Label>
       <VBox fx:id="Vbox_mid" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="342.0">
          <children>
             <StackPane prefHeight="70.0" prefWidth="200.0">

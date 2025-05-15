@@ -1,12 +1,10 @@
 package servidor.simulacion_zombies;
 
-import cliente.clienteRMI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.entorno.Mapa;
 import utilidadesRMI.EstadisticasListener;
 import utilidadesRMI.ServicioRMI;
-import utilidadesRMI.Estadisticas;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;

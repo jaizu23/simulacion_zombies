@@ -90,20 +90,16 @@ public class Tunel {
 
         humano.comprobarPausado();
 
+        pasarTunel(humano, false);
+        lockCondition.lock();
         try {
-            pasarTunel(humano, false);
-            lockCondition.lock();
-            try {
-                hayHumanosRiesgo.signalAll();
-            } finally {
-                lockCondition.unlock();
-            }
-        } catch (InterruptedException e) {
-            logger.error("Ha ocurrido un error mientras {} esperaba a pasar el tunel {} desde la zona de riesgo", humano.getIdHumano(), zona);
+            hayHumanosRiesgo.signalAll();
+        } finally {
+            lockCondition.unlock();
         }
     }
 
-    private synchronized void pasarTunel(Humano humano, boolean ladoSeguro) throws InterruptedException {
+    private synchronized void pasarTunel(Humano humano, boolean ladoSeguro) {
         String idHumano = humano.getIdHumano();
         try {
             humanosEsperando.remove(idHumano);

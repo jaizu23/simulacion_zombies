@@ -2,7 +2,6 @@ package cliente;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import servidor.entorno.Mapa;
 import utilidadesRMI.EstadisticasListener;
 import utilidadesRMI.ServicioRMI;
 
@@ -17,6 +16,7 @@ public class clienteRMI {
 
     public void inicializarCliente (clienteViewController listener) {
         try {
+            logger.info("Inicializando servicio de cliente");
             servicio = (ServicioRMI) Naming.lookup("rmi://localhost/ServicioRMI");
 
             EstadisticasListener stub = (EstadisticasListener) UnicastRemoteObject.exportObject(listener, 0);
@@ -29,6 +29,7 @@ public class clienteRMI {
 
     public void pausarReanudar() {
         try {
+            logger.info("Pausando partida");
             servicio.pausarReanudar();
         } catch (RemoteException e) {
             logger.error("Ha ocurrido un error al pausar/reanudar el juego remotamente");

@@ -9,10 +9,9 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.simulacion_zombies.mainApplication;
-import utilidadesRMI.EstadisticasListener;
 
 public class mainCliente extends Application {
-    private static final Logger logger = LogManager.getLogger(mainApplication.class);
+    private static final Logger logger = LogManager.getLogger(mainCliente.class);
 
     @Override
     public void start(Stage stage) throws Exception {

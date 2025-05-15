@@ -3,7 +3,6 @@ package utilidadesRMI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.seres.Zombie;
-import servidor.simulacion_zombies.mainViewController;
 
 import java.io.Serializable;
 import java.util.*;
@@ -13,10 +12,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Estadisticas implements Serializable {
     private static final Logger logger = LogManager.getLogger(Estadisticas.class);
 
-    private AtomicInteger humanosRefugio = new AtomicInteger(0);
-    private AtomicInteger[] humanosTuneles = new AtomicInteger[4];
-    private AtomicInteger[] humanosRiesgo = new AtomicInteger[4];
-    private AtomicInteger[] zombiesRiesgo = new AtomicInteger[4];
+    private final AtomicInteger humanosRefugio = new AtomicInteger(0);
+    private final AtomicInteger[] humanosTuneles = new AtomicInteger[4];
+    private final AtomicInteger[] humanosRiesgo = new AtomicInteger[4];
+    private final AtomicInteger[] zombiesRiesgo = new AtomicInteger[4];
 
     private final CopyOnWriteArrayList<String> stringsTopZombies= new CopyOnWriteArrayList<>();
     private final transient ArrayList<Zombie> topZombies = new ArrayList<>();
@@ -38,7 +37,7 @@ public class Estadisticas implements Serializable {
     public synchronized void checkAddTopZombie (Zombie zombie) {
         logger.info("Eligiendo el top de zombies");
         if (zombie.getContadorMuertes() <= topZombies.getFirst().getContadorMuertes()) {
-            return; 
+            return;
         }
         if (!topZombies.contains(zombie)) {
             for (int i = 0; i < 3; i++) {

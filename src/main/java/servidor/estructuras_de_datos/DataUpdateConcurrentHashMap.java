@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DataUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V> {
     private Label label = null;
 
-    private Mapa mapa;
+    private final Mapa mapa;
 
     public DataUpdateConcurrentHashMap(Mapa mapa) {
         this.mapa = mapa;

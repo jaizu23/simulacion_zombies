@@ -4,19 +4,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import servidor.entorno.Mapa;
 
-import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Zombie extends Thread {
     private static final Logger logger = LogManager.getLogger(Zombie.class);
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
-    private String idZombie;
+    private final String idZombie;
     private Mapa mapa;
     private int zona = -1;
-    private AtomicInteger contadorMuertes = new AtomicInteger(0);
+    private final AtomicInteger contadorMuertes = new AtomicInteger(0);
 
     public Zombie (String id, int contadorMuertes) {
         this.idZombie = id;
