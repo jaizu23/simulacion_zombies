@@ -78,6 +78,7 @@ public class ZonaRiesgo {
 
     public void salir (String id, boolean humano) {
         if (humano) {
+            humanos.get(id).comprobarPausado();
             posiblesVictimas.remove(id);
             humanos.remove(id);
         } else  {
