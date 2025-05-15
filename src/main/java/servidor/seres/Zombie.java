@@ -87,13 +87,10 @@ public class Zombie extends Thread {
         victima.getAsesinado().set(true);
         logger.info("{} va a interrumpir a {}", idZombie, victima.getIdHumano());
         realizarAtaque(victima, tiempo);
-        generarZombie(nuevoId);
-    }
 
-    private void generarZombie (String id) {
-        Zombie nuevoZombie = new Zombie(id, mapa, zona);
+        Zombie nuevoZombie = new Zombie(nuevoId, mapa, zona);
         nuevoZombie.start();
-        logger.info("{} ha nacido por asesinato.", nuevoZombie.getIdZombie());
+        logger.info("{} ha nacido por asesinato.", nuevoId);
     }
 
     public void atacar() {

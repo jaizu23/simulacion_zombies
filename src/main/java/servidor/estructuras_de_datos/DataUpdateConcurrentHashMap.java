@@ -4,8 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
 import servidor.entorno.Mapa;
-import servidor.exceptions.uninitializedLabelUpdateConcurrentHashMap;
-import servidor.simulacion_zombies.servidorRMI;
+import servidor.exceptions.uninitializedDataUpdateConcurrentHashMap;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,7 +25,7 @@ public class DataUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V>
     @Override
     public V put(@NotNull String key,@NotNull V value) {
         if (label == null) {
-            throw new uninitializedLabelUpdateConcurrentHashMap();
+            throw new uninitializedDataUpdateConcurrentHashMap();
         } else {
             V result = super.put(key, value); // Ya es Thread-safe
             updateLabel();
@@ -37,7 +36,7 @@ public class DataUpdateConcurrentHashMap<V> extends ConcurrentHashMap<String, V>
 
     public V remove(@NotNull String key) {
         if (label == null) {
-            throw new uninitializedLabelUpdateConcurrentHashMap();
+            throw new uninitializedDataUpdateConcurrentHashMap();
         } else {
             V result = super.remove(key); // Ya es Thread-safe
             updateLabel();

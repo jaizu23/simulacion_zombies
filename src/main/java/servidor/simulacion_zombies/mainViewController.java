@@ -88,11 +88,8 @@ public class mainViewController implements Initializable {
 
     private final Mapa mapa;
 
-    private servidorRMI servidor;
-
-    public mainViewController(Mapa mapa, servidorRMI servidor) {
+    public mainViewController(Mapa mapa) {
         this.mapa = mapa;
-        this.servidor = servidor;
     }
 
     private void initializeLabelsData () {

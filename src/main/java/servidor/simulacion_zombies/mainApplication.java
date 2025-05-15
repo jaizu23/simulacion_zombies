@@ -28,7 +28,7 @@ public class mainApplication extends Application {
         servidor.inicializarServidor();
 
         FXMLLoader mainLoader = new FXMLLoader(mainApplication.class.getResource("main-view.fxml"));
-        mainLoader.setController(new mainViewController(mapa, servidor));
+        mainLoader.setController(new mainViewController(mapa));
         Scene mainScene = new Scene(mainLoader.load(), 1024, 576);
 
         mainStage.setTitle("Apocalipsis");

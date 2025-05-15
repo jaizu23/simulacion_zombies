@@ -32,11 +32,8 @@ public class Tunel {
     private final CyclicBarrier grupoCompletado = new CyclicBarrier(3);
     private final Semaphore grupoTunel = new Semaphore(3);
 
-    private final Mapa mapa;
-
     public Tunel (int zona, Mapa mapa) {
         this.zona = zona;
-        this.mapa = mapa;
         humanosSeguros = new DataUpdateConcurrentHashMap<>(mapa, 10000);
         humanosEsperando = new DataUpdateConcurrentHashMap<>(mapa, 3);
         humanosRiesgo = new DataUpdateConcurrentHashMap<>(mapa, 10000);
@@ -115,9 +112,8 @@ public class Tunel {
 
             Platform.runLater(() -> idHumanoTunel.set(idHumano));
             Thread.sleep(1000);
-            Platform.runLater(() -> idHumanoTunel.set(""));
-
             humano.comprobarPausado();
+            Platform.runLater(() -> idHumanoTunel.set(""));
             logger.info("{} ha salido del tunel {}", idHumano, zona);
         } catch (InterruptedException e) {
             logger.error("{} ha sido interrumpido mientras pasaba por el tunel {}", idHumano, zona);
