@@ -1,7 +1,9 @@
 package utilidadesRMI;
 
-import org.jetbrains.annotations.NotNull;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import servidor.seres.Zombie;
+import servidor.simulacion_zombies.mainViewController;
 
 import java.io.Serializable;
 import java.util.*;
@@ -9,14 +11,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Estadisticas implements Serializable {
+    private static final Logger logger = LogManager.getLogger(Estadisticas.class);
+
     private AtomicInteger humanosRefugio = new AtomicInteger(0);
     private AtomicInteger[] humanosTuneles = new AtomicInteger[4];
     private AtomicInteger[] humanosRiesgo = new AtomicInteger[4];
     private AtomicInteger[] zombiesRiesgo = new AtomicInteger[4];
 
-    private CopyOnWriteArrayList<String> stringsTopZombies= new CopyOnWriteArrayList<>();
-    private transient ArrayList<Zombie> topZombies = new ArrayList<>();
-    private transient ArrayList<Zombie> zombiesCandidatos = new ArrayList<>();
+    private final CopyOnWriteArrayList<String> stringsTopZombies= new CopyOnWriteArrayList<>();
+    private final transient ArrayList<Zombie> topZombies = new ArrayList<>();
+    private final transient ArrayList<Zombie> zombiesCandidatos = new ArrayList<>();
 
     public Estadisticas () {
         for (int i = 0; i < 4; i++) {
@@ -32,6 +36,7 @@ public class Estadisticas implements Serializable {
     }
 
     public synchronized void checkAddTopZombie (Zombie zombie) {
+        logger.info("Eligiendo el top de zombies");
         if (zombie.getContadorMuertes() <= topZombies.getFirst().getContadorMuertes()) {
             return;
         }
@@ -61,36 +66,16 @@ public class Estadisticas implements Serializable {
         return humanosRefugio;
     }
 
-    public void setHumanosRefugio(AtomicInteger humanosRefugio) {
-        this.humanosRefugio = humanosRefugio;
-    }
-
     public AtomicInteger[] getHumanosTuneles() {
         return humanosTuneles;
-    }
-
-    public void setHumanosTuneles(AtomicInteger[] humanosTuneles) {
-        this.humanosTuneles = humanosTuneles;
     }
 
     public AtomicInteger[] getHumanosRiesgo() {
         return humanosRiesgo;
     }
 
-    public void setHumanosRiesgo(AtomicInteger[] humanosRiesgo) {
-        this.humanosRiesgo = humanosRiesgo;
-    }
-
     public AtomicInteger[] getZombiesRiesgo() {
         return zombiesRiesgo;
-    }
-
-    public void setZombiesRiesgo(AtomicInteger[] zombiesRiesgo) {
-        this.zombiesRiesgo = zombiesRiesgo;
-    }
-
-    public ArrayList<Zombie> getTopZombies() {
-        return topZombies;
     }
 
     public CopyOnWriteArrayList<String> getStringsTopZombies() {

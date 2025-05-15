@@ -93,6 +93,7 @@ public class mainViewController implements Initializable {
     }
 
     private void initializeLabelsData () {
+        logger.info("Inicializando labels");
         // Labels zona segura
         DataUpdateConcurrentHashMap<Humano> humanosDescanso = mapa.getDescanso().getHumanosDescanso();
         DataUpdateConcurrentHashMap<Humano> humanosComedor = mapa.getComedor().getHumanosComedor();

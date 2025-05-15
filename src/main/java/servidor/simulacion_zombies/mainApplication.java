@@ -1,8 +1,5 @@
 package servidor.simulacion_zombies;
 
-import cliente.clienteViewController;
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javafx.application.Application;
@@ -10,17 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import servidor.entorno.Mapa;
-import utilidadesRMI.ServicioRMI;
 
 import java.io.IOException;
-import java.rmi.Naming;
-import java.rmi.registry.LocateRegistry;
 
 public class mainApplication extends Application {
     private static final Logger logger = LogManager.getLogger(mainApplication.class);
 
     @Override
     public void start(Stage mainStage) throws IOException {
+        logger.info("Inciando servidor");
         servidorRMI servidor = new servidorRMI();
         Mapa mapa = new Mapa(servidor);
         servidor.setMapa(mapa);
@@ -38,6 +33,7 @@ public class mainApplication extends Application {
         mainStage.setY(0);
         mainStage.show();
 
+        logger.info("Mostrando vista servidor");
         mapa.start();
     }
 }

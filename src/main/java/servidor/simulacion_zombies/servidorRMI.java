@@ -41,6 +41,7 @@ public class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
     @Override
     public void pausarReanudar() throws RemoteException {
         if (mapa.isPausado()) {
+            logger.info("Reanudando partida");
             mapa.setPausado(false);
             mapa.getLockPausado().lock();
             try {
@@ -49,6 +50,7 @@ public class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
                 mapa.getLockPausado().unlock();
             }
         } else {
+            logger.info("Pausando partida");
             mapa.setPausado(true);
         }
     }

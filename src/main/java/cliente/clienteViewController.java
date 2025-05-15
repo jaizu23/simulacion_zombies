@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import servidor.entorno.Mapa;
-import servidor.seres.Zombie;
 import utilidadesRMI.Estadisticas;
 import utilidadesRMI.EstadisticasListener;
 

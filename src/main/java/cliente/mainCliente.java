@@ -6,12 +6,17 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import servidor.simulacion_zombies.mainApplication;
 import utilidadesRMI.EstadisticasListener;
 
 public class mainCliente extends Application {
+    private static final Logger logger = LogManager.getLogger(mainApplication.class);
+
     @Override
     public void start(Stage stage) throws Exception {
+        logger.info("Inicializando cliente");
         clienteRMI cliente = new clienteRMI();
 
         Stage clienteStage = new Stage();
@@ -31,6 +36,7 @@ public class mainCliente extends Application {
         double y = screenBounds.getMaxY() - 610;
         clienteStage.setX(x);
         clienteStage.setY(y);
+        logger.info("Mostrando vista cliente");
         clienteStage.show();
     }
 }
