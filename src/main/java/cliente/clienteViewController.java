@@ -72,6 +72,7 @@ public class clienteViewController implements Initializable, EstadisticasListene
         humanosRiesgo = new ArrayList<>(List.of(HR1, HR2, HR3, HR4));
         zombiesRiesgo = new ArrayList<>(List.of(ZR1, ZR2, ZR3, ZR4));
     }
+
     @Override
     public void actualizarEstadisticas(Estadisticas estadisticas) throws RemoteException {
         Platform.runLater(() -> {

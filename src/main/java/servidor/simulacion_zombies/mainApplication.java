@@ -40,8 +40,4 @@ public class mainApplication extends Application {
 
         mapa.start();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
 }

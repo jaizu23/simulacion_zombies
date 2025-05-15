@@ -55,8 +55,6 @@ public class Estadisticas implements Serializable {
                 stringsTopZombies.set(i, stringZombie.append(topZombies.get(i).getIdZombie()).append(" - ").append(topZombies.get(i).getContadorMuertes()).append(" muertes\n").toString());
             }
         }
-
-
     }
 
     public AtomicInteger getHumanosRefugio() {
