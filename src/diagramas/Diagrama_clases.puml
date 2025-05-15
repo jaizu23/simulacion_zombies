@@ -1,32 +1,28 @@
 @startuml
 class Humano {
-+ Humano(id: String, mapa: Mapa)
 + void run()
-+ void serAtacado()
-+ int compareTo(Humano otro)
 + void añadirComida(int)
-+comprobaPausado()
++ comprobaPausado()
 }
 
 class Zombie {
-+ Zombie(String id, Mapa mapa)
-+ Zombie(String id, Mapa mapa, int zona)
 + void run()
 + boolean hayHumanosDisponibles()
 + void atacar()
-+ int getContadorMuertes()
 + void sumarContadorMuertes()
-+comprobarPausado()
++ comprobarPausado()
++ realizarAtaque(Humano victima, int tiempo)
++ zombificar(HUmano victima, int tiempo)
++ generarZombie(String id)
 }
 
 class Mapa {
-+ Mapa()
 + void run()
-+ boolean isPausado()
++ comprobarPausado()
++ actualizarEstadisticas()
 }
 
 class ZonaRiesgo {
-+ ZonaRiesgo(int zona)
 + void recolectarComida(Humano humano) throws killedHumanException
 + void entrarHumano(Humano humano)
 + void entrarZombie(Zombie zombie)
@@ -35,16 +31,12 @@ class ZonaRiesgo {
 }
 
 class Tunel {
-+ Tunel(int zona, Mapa mapa)
 + void esperarSeguro(Humano humano)
 + void esperarRiesgo(Humano humano) throws killedHumanException
-- void pasarTunel() throws InterruptedException
-+ void run()
++ void pasarTunel(Humano humano, boolean ladoSeguro) throws InterruptedException
 }
 
 class Comedor {
-+ LabelUpdateConcurrentHashMap<Humano> getHumanosComedor()
-+ IntegerProperty getContadorComida()
 + void comer(Humano humano)
 + void depositarComida(Humano humano)
 }
@@ -64,11 +56,59 @@ class ZonaComun {
 +prepararse(Humano humano)
 }
 
+class clienteRMI {
+    + inicializarCliente(listener: clienteViewController)
+    + pausarReanudar()
+}
+
+class clienteViewController implements Initializable, EstadisticasListener {
+    + actualizarEstadisticas(est: Estadisticas)
+    + initialize(url: URL, rb: ResourceBundle)
+}
+
+class mainCliente extends Application {
+    + start(stage: Stage)
+}
+
+class mainApplication extends Application {
+    + start(stage: Stage)
+    + main(args: String[])
+}
+
+class mainViewController implements Initializable {
+    + initialize(url: URL, rb: ResourceBundle)
+}
+
+class servidorRMI extends UnicastRemoteObject implements ServicioRMI {
+    + inicializarServidor()
+    + registrarListener(listener: EstadisticasListener)
+    + pausarReanudar()
+    + actualizarEstadisticas()
+}
+
+
+
+clienteRMI --> ServicioRMI : usa
+clienteRMI --> clienteViewController : recibe listener
+clienteViewController --> clienteRMI : contiene
+
+mainCliente --> clienteRMI : crea y usa
+mainCliente --> clienteViewController : crea y pasa
+
+mainApplication --> servidorRMI : crea y usa
+mainApplication --> mainViewController : crea
+mainApplication --> Mapa : crea y pasa
+
+mainViewController --> Mapa : contiene
+
+servidorRMI --> EstadisticasListener : comunica
+servidorRMI --> Mapa : contiene
+
 Humano --> Mapa : usa
 Mapa --> Comedor : contiene
 Mapa --> ZonaComun : contiene
 Mapa --> Descanso : contiene
-Mapa --> Zombie : crea
+Mapa ---> Zombie : crea
 Mapa --> Humano : crea
 Zombie --> Mapa : usa
 Zombie --> Humano : ataca / zombifica
